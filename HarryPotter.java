@@ -340,6 +340,15 @@ class Personagem {
 
 public class HarryPotter {
 
+    public static Boolean stringToBoolean(String frase){
+        Boolean valorlogico = false;
+        if(frase.equals("VERDADEIRO")){
+            valorlogico = true;
+        }
+
+        return valorlogico;
+    }
+
     public static String[] SeparaAtributos(String objeto) { // esta funcao separa os atributos do objeto que estão
                                                             // contidos em uma string e
                                                             // os guarda separadamente em um array
@@ -378,6 +387,7 @@ public class HarryPotter {
             //list.mostra();
             DateTime data = new DateTime(atributos[12]);
             //data.mostra();
+            Boolean test = stringToBoolean(atributos[7]);
 
             /*
              * for (int i = 0; i < atributos.length; i++) {
