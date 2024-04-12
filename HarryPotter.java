@@ -146,7 +146,7 @@ class Personagem {
     private String species;
     private String patronus;
     private Boolean hogwartsStaff;
-    private String hogwartsStudent;
+    private Boolean hogwartsStudent;
     private String actorName;
     private Boolean alive;
     private DateTime dateOfBirth;
@@ -157,7 +157,7 @@ class Personagem {
     private Boolean wizard;
 
     public Personagem(String id, String name, Lista alternate_names, String house, String ancestry, String species,
-            String patronus, Boolean hogwartsStaff, String hogwartsStudent, String actorName, Boolean alive,
+            String patronus, Boolean hogwartsStaff, Boolean hogwartsStudent, String actorName, Boolean alive,
             DateTime dateOfBirth, int yearOfBirth, String eyeColour, String gender, String hairColour, Boolean wizard) {
         this.id = id;
         this.name = name;
@@ -244,11 +244,11 @@ class Personagem {
         this.hogwartsStaff = hogwartsStaff;
     }
 
-    public String getHogwartsStudent() {
+    public Boolean getHogwartsStudent() {
         return hogwartsStudent;
     }
 
-    public void setHogwartsStudent(String hogwartsStudent) {
+    public void setHogwartsStudent(Boolean hogwartsStudent) {
         this.hogwartsStudent = hogwartsStudent;
     }
 
@@ -320,16 +320,16 @@ class Personagem {
 
     public void imprime() {
 
-        System.out.print(id + " " + name + " ");
+        System.out.print(id + " ## " + name + " ## ");
         alternate_names.mostra();
-        System.out.print(house + " " + ancestry + " " + species + " "  + patronus + " ");
-        System.out.print(hogwartsStaff + " ");
-        System.out.print(hogwartsStudent + " " + actorName + " ");
-        System.out.print(alive + " ");
+        System.out.print(house + " ## " + ancestry + " ## " + species + " ## "  + patronus + " ## ");
+        System.out.print(hogwartsStaff + " ## ");
+        System.out.print(hogwartsStudent + " ## " + actorName + " ## ");
+        System.out.print(alive + " ## ");
         dateOfBirth.mostra();
-        System.out.print(yearOfBirth + " ");
-        System.out.print(eyeColour + " " + gender + " " + hairColour + " ");
-        System.out.print(wizard + " ");
+        System.out.print(yearOfBirth + " ## ");
+        System.out.print(eyeColour + " ## " + gender + " ## " + hairColour + " ## ");
+        System.out.print(wizard);
 
     }
 
@@ -381,22 +381,22 @@ public class HarryPotter {
             Personagem personagem[] = new Personagem[405];
             String atributos[] = new String[18];
 
-            String objeto = Sc.nextLine();
-            atributos = SeparaAtributos(objeto);
-            Lista list = new Lista(atributos[2]);
-            //list.mostra();
-            DateTime data = new DateTime(atributos[12]);
-            //data.mostra();
-            //Boolean test = stringToBoolean(atributos[7]);
-            int ano = Integer.parseInt(atributos[13]);
+            int i = 0;
 
-            personagem[0] = new Personagem(atributos[0], atributos[1], list, atributos[3], atributos[4], atributos[5], atributos[6], stringToBoolean(atributos[7]), atributos[8], atributos[9], stringToBoolean(atributos[10]), data, ano, atributos[14], atributos[15], atributos[16], stringToBoolean(atributos[17]));
-            personagem[0].imprime();
-            /*
-             * for (int i = 0; i < atributos.length; i++) {
-             * System.out.println(atributos[i]);
-             * }
-             */
+            while(Sc.hasNextLine()){
+                String objeto = Sc.nextLine();
+                atributos = SeparaAtributos(objeto);
+                Lista list = new Lista(atributos[2]);
+                DateTime data = new DateTime(atributos[12]);
+                int ano = Integer.parseInt(atributos[13]);
+                personagem[i] = new Personagem(atributos[0], atributos[1], list, atributos[3], atributos[4], atributos[5], atributos[6], stringToBoolean(atributos[7]), stringToBoolean(atributos[8]), atributos[9], stringToBoolean(atributos[10]), data, ano, atributos[14], atributos[15], atributos[16], stringToBoolean(atributos[17]));
+                personagem[i].imprime();
+                i++;
+                System.out.println();
+                System.out.println();
+            }
+
+
 
             Sc.close();
         } catch (FileNotFoundException e) {
