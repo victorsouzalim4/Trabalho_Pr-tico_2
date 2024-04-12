@@ -3,6 +3,9 @@
 #include <stdbool.h>
 
 typedef struct{
+    char day[100];
+    char month[100];
+    char year[100];
 
 } DateTime;
 
@@ -33,5 +36,20 @@ typedef struct{
 }Personagem;
 
 int main(){
+
+    FILE *arq = fopen("C:/Users/Victor/Documents/FACULDADE/2 semestre/Aeds 2/TP_2/characters.csv", "r");
+
+    char linha[100];
+
+
+    if(arq == NULL){
+        printf("Erro na abertura do arquivo");
+        return 1;
+    }
+
+    fgets(linha, 100, arq);
+    while(fgets(linha, 100, arq) != NULL){
+        printf("%s", linha);
+    }
 
 }
