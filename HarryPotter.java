@@ -52,12 +52,40 @@ class Lista {
 
         int qtd = NumApelidos(frase);
         apelidos = new String[qtd];
+        pegaApelido(frase, apelidos);
         
-        /*
-         * for (int i = 0; i < qtd; i++) {
-         * apelidos[i] = pegaApelido(frase);
-         * }
-         */
+         
+    }
+
+    public void pegaApelido(String frase, String[] Apelidos){
+        int pos = 0;
+
+        for(int i = 0; i < Apelidos.length; i++){
+            int qtd = 0;
+            StringBuilder str = new StringBuilder();
+
+            for(int j = pos; j < frase.length() ; j++){
+                int Vascii = frase.charAt(j);
+
+                if(Vascii == 39){
+                    qtd++;
+                    j++;
+                }
+
+                if(qtd != 0){
+                    if(qtd == 1){
+                        str.append(frase.charAt(j));
+                    }
+                    else{
+                        pos = j;
+                        j = frase.length();
+                    }
+                }
+            }
+
+            apelidos[i] = new String(str);
+ 
+        }
     }
 
     public int NumApelidos(String frase) {
