@@ -2,6 +2,8 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+//classes
+
 class DateTime {
     private String day;
     private String month;
@@ -43,42 +45,53 @@ class DateTime {
 
 }
 
-/*
- * class Lista{
- * private String codenames[];
- * 
- * Lista(String frase){
- * 
- * int qtd = 0;
- * while(temNomes(frase)){
- * qtd++;
- * }
- * codenames = new String[qtd];
- * 
- * for(int i = 0; i < qtd; i++){
- * codenames[i] = pegaApelido(frase);
- * }
- * }
- * 
- * public String[] getCodenames() {
- * return codenames;
- * }
- * public void setCodenames(String[] codenames) {
- * this.codenames = codenames;
- * }
- * 
- * public void mostra(){
- * for(int i = 0; i < codenames.length; i++){
- * System.out.print(codenames[i] + " ");
- * }
- * }
- * }
- */
+class Lista {
+    private String apelidos[];
+
+    Lista(String frase) {
+
+        int qtd = NumApelidos(frase);
+        apelidos = new String[qtd];
+        
+        /*
+         * for (int i = 0; i < qtd; i++) {
+         * apelidos[i] = pegaApelido(frase);
+         * }
+         */
+    }
+
+    public int NumApelidos(String frase) {
+        int qtd = 0;
+
+        for (int i = 0; i < frase.length(); i++) {
+            int Vascii = frase.charAt(i);
+            if (Vascii == 39) {
+                qtd++;
+            }
+        }
+
+        return qtd/2;
+    }
+
+    public String[] getapelidos() {
+        return apelidos;
+    }
+
+    public void setapelidos(String[] apelidos) {
+        this.apelidos = apelidos;
+    }
+
+    public void mostra() {
+        for (int i = 0; i < apelidos.length; i++) {
+            System.out.print(apelidos[i] + " ");
+        }
+    }
+}
 
 class Personagem {
     private String id;
     private String name;
-    // private Lista alternate_names;
+    private Lista alternate_names;
     private String house;
     private String ancestry;
     private String species;
@@ -94,12 +107,12 @@ class Personagem {
     private String hairColour;
     private Boolean wizard;
 
-    public Personagem(String id, String name /* Lista alternate_names */, String house, String ancestry, String species,
+    public Personagem(String id, String name, Lista alternate_names, String house, String ancestry, String species,
             String patronus, Boolean hogwartsStaff, String hogwartsStudent, String actorName, Boolean alive,
             DateTime dateOfBirth, int yearOfBirth, String eyeColour, String gender, String hairColour, Boolean wizard) {
         this.id = id;
         this.name = name;
-        // this.alternate_names = alternate_names;
+        this.alternate_names = alternate_names;
         this.house = house;
         this.ancestry = ancestry;
         this.species = species;
@@ -115,6 +128,8 @@ class Personagem {
         this.hairColour = hairColour;
         this.wizard = wizard;
     }
+
+    // getters ans setters
 
     public String getId() {
         return id;
@@ -132,14 +147,14 @@ class Personagem {
         this.name = name;
     }
 
-    /*
-     * public Lista getAlternate_names() {
-     * return alternate_names;
-     * }
-     * public void setAlternate_names(Lista alternate_names) {
-     * this.alternate_names = alternate_names;
-     * }
-     */
+    public Lista getAlternate_names() {
+        return alternate_names;
+    }
+
+    public void setAlternate_names(Lista alternate_names) {
+        this.alternate_names = alternate_names;
+    }
+
     public String getHouse() {
         return house;
     }
@@ -252,6 +267,8 @@ class Personagem {
         this.wizard = wizard;
     }
 
+    // outros métodos
+
     public void imprime(String Id) {
 
         System.out.print(id + "\n" + name);
@@ -272,20 +289,19 @@ class Personagem {
     }
 }
 
+public class HarryPotter {
 
-
-
-public class HarryPotter {              //este método separa os atributos do objeto que estão contidos em uma string e os guarda separadamente em um array
-
-    public static String[] SeparaAtributos(String objeto) {
+    public static String[] SeparaAtributos(String objeto) { // esta funcao separa os atributos do objeto que estão
+                                                            // contidos em uma string e
+                                                            // os guarda separadamente em um array
         String atributos[] = new String[18];
         int pos = 0;
 
         for (int i = 0; i < atributos.length; i++) {
-            StringBuilder aux = new StringBuilder();      
+            StringBuilder aux = new StringBuilder();
 
-            for (int j = pos; j < objeto.length() && objeto.charAt(j) != ';'; j++ ) {
-                aux.append(objeto.charAt(j));          
+            for (int j = pos; j < objeto.length() && objeto.charAt(j) != ';'; j++) {
+                aux.append(objeto.charAt(j));
             }
 
             pos = pos + aux.length() + 1;
@@ -298,25 +314,27 @@ public class HarryPotter {              //este método separa os atributos do ob
         return atributos;
     }
 
-
     public static void main(String[] args) {
 
         try {
             File myObj = new File("characters.csv");
-            Scanner Sc = new Scanner(myObj); Sc.nextLine();
+            Scanner Sc = new Scanner(myObj);
+            Sc.nextLine();
             Personagem personagem[] = new Personagem[405];
             String atributos[] = new String[18];
 
             String objeto = Sc.nextLine();
             atributos = SeparaAtributos(objeto);
+            Lista list = new Lista(atributos[2]);
 
-            for(int i = 0; i < atributos.length; i++){
-                System.out.println(atributos[i]);
-            }
+            /*
+             * for (int i = 0; i < atributos.length; i++) {
+             * System.out.println(atributos[i]);
+             * }
+             */
 
             Sc.close();
-        } 
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("ERRO");
             e.printStackTrace();
         }
