@@ -329,7 +329,7 @@ class Personagem {
         dateOfBirth.mostra();
         System.out.print(yearOfBirth + " ## ");
         System.out.print(eyeColour + " ## " + gender + " ## " + hairColour + " ## ");
-        System.out.print(wizard);
+        System.out.println(wizard);
 
     }
 
@@ -339,6 +339,15 @@ class Personagem {
 }
 
 public class HarryPotter {
+
+    public static void getObjeto(String id, Personagem personagem[]){
+        for(int i = 0; i < personagem.length; i++){
+            if(personagem[i].getId().equals(id)){
+                personagem[i].imprime();
+                i = personagem.length;
+            }
+        }
+    }
 
     public static Boolean isFim(String frase){
         Boolean test = true;
@@ -383,12 +392,12 @@ public class HarryPotter {
     }
 
     public static void main(String[] args) {
-
+        Personagem personagem[] = new Personagem[405];
         try {
             File myObj = new File("characters.csv");
             Scanner Sc = new Scanner(myObj);
             Sc.nextLine();
-            Personagem personagem[] = new Personagem[405];
+            
             String atributos[] = new String[18];
 
             int i = 0;
@@ -413,6 +422,7 @@ public class HarryPotter {
 
         String id = Sc.nextLine();
         while(isFim(id)){
+            getObjeto(id, personagem);
             id = Sc.nextLine();
         }
 
