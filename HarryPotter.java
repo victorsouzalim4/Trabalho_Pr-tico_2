@@ -132,7 +132,7 @@ class Lista {
 
     public void mostra() {
         for (int i = 0; i < apelidos.length; i++) {
-            System.out.println(apelidos[i] + " ");
+            System.out.print(apelidos[i] + " ");
         }
     }
 }
@@ -318,16 +318,16 @@ class Personagem {
 
     // outros métodos
 
-    public void imprime(String Id) {
+    public void imprime() {
 
-        System.out.print(id + "\n" + name);
-        // alternate_names.mostra();
-        System.out.print(house + " " + ancestry + " " + species + " " + " " + patronus + " ");
-        System.out.print(hogwartsStaff);
+        System.out.print(id + " " + name + " ");
+        alternate_names.mostra();
+        System.out.print(house + " " + ancestry + " " + species + " "  + patronus + " ");
+        System.out.print(hogwartsStaff + " ");
         System.out.print(hogwartsStudent + " " + actorName + " ");
-        System.out.print(alive);
+        System.out.print(alive + " ");
         dateOfBirth.mostra();
-        System.out.print(yearOfBirth);
+        System.out.print(yearOfBirth + " ");
         System.out.print(eyeColour + " " + gender + " " + hairColour + " ");
         System.out.print(wizard + " ");
 
@@ -387,8 +387,11 @@ public class HarryPotter {
             //list.mostra();
             DateTime data = new DateTime(atributos[12]);
             //data.mostra();
-            Boolean test = stringToBoolean(atributos[7]);
+            //Boolean test = stringToBoolean(atributos[7]);
+            int ano = Integer.parseInt(atributos[13]);
 
+            personagem[0] = new Personagem(atributos[0], atributos[1], list, atributos[3], atributos[4], atributos[5], atributos[6], stringToBoolean(atributos[7]), atributos[8], atributos[9], stringToBoolean(atributos[10]), data, ano, atributos[14], atributos[15], atributos[16], stringToBoolean(atributos[17]));
+            personagem[0].imprime();
             /*
              * for (int i = 0; i < atributos.length; i++) {
              * System.out.println(atributos[i]);
