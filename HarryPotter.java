@@ -10,24 +10,24 @@ class DateTime {
     private String year;
 
     DateTime(String data) {
-       String valores[] = new String[3];
-       pegaValores(data, valores);
+        String valores[] = new String[3];
+        pegaValores(data, valores);
 
-       this.day = valores[0];
-       this.month = valores[1];
-       this.year = valores[2];
+        this.day = valores[0];
+        this.month = valores[1];
+        this.year = valores[2];
     }
 
-    public void pegaValores(String data, String[] valores){
+    public void pegaValores(String data, String[] valores) {
         int pos = 0;
 
-        for(int i = 0; i < valores.length; i++){
+        for (int i = 0; i < valores.length; i++) {
             StringBuilder str = new StringBuilder();
 
-            for(int j = pos; j < data.length(); j++){
-                if(data.charAt(j) != '-'){
+            for (int j = pos; j < data.length(); j++) {
+                if (data.charAt(j) != '-') {
                     str.append(data.charAt(j));
-                }else{
+                } else {
                     pos = ++j;
                     j = data.length();
                 }
@@ -74,30 +74,28 @@ class Lista {
         int qtd = NumApelidos(frase);
         apelidos = new String[qtd];
         pegaApelido(frase, apelidos);
-        
-         
+
     }
 
-    public void pegaApelido(String frase, String[] Apelidos){
+    public void pegaApelido(String frase, String[] Apelidos) {
         int pos = 0;
 
-        for(int i = 0; i < Apelidos.length; i++){
+        for (int i = 0; i < Apelidos.length; i++) {
             int qtd = 0;
             StringBuilder str = new StringBuilder();
 
-            for(int j = pos; j < frase.length() ; j++){
+            for (int j = pos; j < frase.length(); j++) {
                 int Vascii = frase.charAt(j);
 
-                if(Vascii == 39){
+                if (Vascii == 39) {
                     qtd++;
                     j++;
                 }
 
-                if(qtd != 0){
-                    if(qtd == 1){
+                if (qtd != 0) {
+                    if (qtd == 1) {
                         str.append(frase.charAt(j));
-                    }
-                    else{
+                    } else {
                         pos = j;
                         j = frase.length();
                     }
@@ -105,7 +103,7 @@ class Lista {
             }
 
             apelidos[i] = new String(str);
- 
+
         }
     }
 
@@ -119,7 +117,7 @@ class Lista {
             }
         }
 
-        return qtd/2;
+        return qtd / 2;
     }
 
     public String[] getapelidos() {
@@ -131,9 +129,16 @@ class Lista {
     }
 
     public void mostra() {
+        System.out.print("{");
         for (int i = 0; i < apelidos.length; i++) {
-            System.out.print(apelidos[i] + " ");
+            if (i != apelidos.length - 1) {
+                System.out.print(apelidos[i] + ", ");
+            } else {
+                System.out.print(apelidos[i]);
+            }
+
         }
+        System.out.print("}" + " ## ");
     }
 }
 
@@ -320,16 +325,16 @@ class Personagem {
 
     public void imprime() {
 
-        System.out.print(id + " ## " + name + " ## ");
+        System.out.print("[" + id + " ## " + name + " ## ");
         alternate_names.mostra();
-        System.out.print(house + " ## " + ancestry + " ## " + species + " ## "  + patronus + " ## ");
+        System.out.print(house + " ## " + ancestry + " ## " + species + " ## " + patronus + " ## ");
         System.out.print(hogwartsStaff + " ## ");
         System.out.print(hogwartsStudent + " ## " + actorName + " ## ");
         System.out.print(alive + " ## ");
         dateOfBirth.mostra();
         System.out.print(yearOfBirth + " ## ");
         System.out.print(eyeColour + " ## " + gender + " ## " + hairColour + " ## ");
-        System.out.println(wizard);
+        System.out.println(wizard + "]");
 
     }
 
@@ -340,28 +345,28 @@ class Personagem {
 
 public class HarryPotter {
 
-    public static void getObjeto(String id, Personagem personagem[]){
-        for(int i = 0; i < personagem.length; i++){
-            if(personagem[i].getId().equals(id)){
+    public static void getObjeto(String id, Personagem personagem[]) {
+        for (int i = 0; i < personagem.length; i++) {
+            if (personagem[i].getId().equals(id)) {
                 personagem[i].imprime();
                 i = personagem.length;
             }
         }
     }
 
-    public static Boolean isFim(String frase){
+    public static Boolean isFim(String frase) {
         Boolean test = true;
 
-        if(frase.equals("FIM")){
+        if (frase.equals("FIM")) {
             test = false;
         }
 
         return test;
     }
 
-    public static Boolean stringToBoolean(String frase){
+    public static Boolean stringToBoolean(String frase) {
         Boolean valorlogico = false;
-        if(frase.equals("VERDADEIRO")){
+        if (frase.equals("VERDADEIRO")) {
             valorlogico = true;
         }
 
@@ -394,24 +399,27 @@ public class HarryPotter {
     public static void main(String[] args) {
         Personagem personagem[] = new Personagem[405];
         try {
-            File myObj = new File("characters.csv");
+            File myObj = new File("/tmp/characters.csv");
             Scanner Sc = new Scanner(myObj);
             Sc.nextLine();
-            
+
             String atributos[] = new String[18];
 
             int i = 0;
 
-            while(Sc.hasNextLine()){
+            while (Sc.hasNextLine()) {
                 String objeto = Sc.nextLine();
                 atributos = SeparaAtributos(objeto);
                 Lista list = new Lista(atributos[2]);
                 DateTime data = new DateTime(atributos[12]);
                 int ano = Integer.parseInt(atributos[13]);
-                personagem[i] = new Personagem(atributos[0], atributos[1], list, atributos[3], atributos[4], atributos[5], atributos[6], stringToBoolean(atributos[7]), stringToBoolean(atributos[8]), atributos[9], stringToBoolean(atributos[10]), data, ano, atributos[14], atributos[15], atributos[16], stringToBoolean(atributos[17]));
+                personagem[i] = new Personagem(atributos[0], atributos[1], list, atributos[3], atributos[4],
+                        atributos[5], atributos[6], stringToBoolean(atributos[7]), stringToBoolean(atributos[8]),
+                        atributos[9], stringToBoolean(atributos[10]), data, ano, atributos[14], atributos[15],
+                        atributos[16], stringToBoolean(atributos[17]));
                 i++;
             }
-            
+
             Sc.close();
         } catch (FileNotFoundException e) {
             System.out.println("ERRO");
@@ -421,7 +429,7 @@ public class HarryPotter {
         Scanner Sc = new Scanner(System.in);
 
         String id = Sc.nextLine();
-        while(isFim(id)){
+        while (isFim(id)) {
             getObjeto(id, personagem);
             id = Sc.nextLine();
         }
