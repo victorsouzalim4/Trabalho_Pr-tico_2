@@ -340,6 +340,16 @@ class Personagem {
 
 public class HarryPotter {
 
+    public static Boolean isFim(String frase){
+        Boolean test = true;
+
+        if(frase.equals("FIM")){
+            test = false;
+        }
+
+        return test;
+    }
+
     public static Boolean stringToBoolean(String frase){
         Boolean valorlogico = false;
         if(frase.equals("VERDADEIRO")){
@@ -390,18 +400,20 @@ public class HarryPotter {
                 DateTime data = new DateTime(atributos[12]);
                 int ano = Integer.parseInt(atributos[13]);
                 personagem[i] = new Personagem(atributos[0], atributos[1], list, atributos[3], atributos[4], atributos[5], atributos[6], stringToBoolean(atributos[7]), stringToBoolean(atributos[8]), atributos[9], stringToBoolean(atributos[10]), data, ano, atributos[14], atributos[15], atributos[16], stringToBoolean(atributos[17]));
-                personagem[i].imprime();
                 i++;
-                System.out.println();
-                System.out.println();
             }
-
-
-
+            
             Sc.close();
         } catch (FileNotFoundException e) {
             System.out.println("ERRO");
             e.printStackTrace();
+        }
+
+        Scanner Sc = new Scanner(System.in);
+
+        String id = Sc.nextLine();
+        while(isFim(id)){
+            id = Sc.nextLine();
         }
 
     }
