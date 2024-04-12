@@ -9,10 +9,31 @@ class DateTime {
     private String month;
     private String year;
 
-    DateTime(String day, String month, String year) {
-        this.day = day;
-        this.month = month;
-        this.year = year;
+    DateTime(String data) {
+       String valores[] = new String[3];
+       pegaValores(data, valores);
+
+       this.day = valores[0];
+       this.month = valores[1];
+       this.year = valores[2];
+    }
+
+    public void pegaValores(String data, String[] valores){
+        int pos = 0;
+
+        for(int i = 0; i < valores.length; i++){
+            StringBuilder str = new StringBuilder();
+
+            for(int j = pos; j < data.length(); j++){
+                if(data.charAt(j) != '-'){
+                    str.append(data.charAt(j));
+                }else{
+                    pos = ++j;
+                    j = data.length();
+                }
+            }
+            valores[i] = new String(str);
+        }
     }
 
     public String getDay() {
@@ -40,7 +61,7 @@ class DateTime {
     }
 
     public void mostra() {
-        System.out.print(day + "/" + month + "/" + year + " ");
+        System.out.print(day + "-" + month + "-" + year + " ");
     }
 
 }
@@ -111,7 +132,7 @@ class Lista {
 
     public void mostra() {
         for (int i = 0; i < apelidos.length; i++) {
-            System.out.print(apelidos[i] + " ");
+            System.out.println(apelidos[i] + " ");
         }
     }
 }
@@ -354,6 +375,9 @@ public class HarryPotter {
             String objeto = Sc.nextLine();
             atributos = SeparaAtributos(objeto);
             Lista list = new Lista(atributos[2]);
+            //list.mostra();
+            DateTime data = new DateTime(atributos[12]);
+            //data.mostra();
 
             /*
              * for (int i = 0; i < atributos.length; i++) {
