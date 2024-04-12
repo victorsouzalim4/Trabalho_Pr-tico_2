@@ -310,6 +310,9 @@ public class HarryPotter {              //este método separa os atributos do ob
             String objeto = Sc.nextLine();
             atributos = SeparaAtributos(objeto);
 
+            for(int i = 0; i < atributos.length; i++){
+                System.out.println(atributos[i]);
+            }
 
             Sc.close();
         } 
