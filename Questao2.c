@@ -35,11 +35,12 @@ typedef struct{
 
 }Personagem;
 
+
 int main(){
 
     FILE *arq = fopen("C:/Users/Victor/Documents/FACULDADE/2 semestre/Aeds 2/TP_2/characters.csv", "r");
 
-    char linha[100];
+    char linha[1000];
 
 
     if(arq == NULL){
@@ -47,9 +48,33 @@ int main(){
         return 1;
     }
 
-    fgets(linha, 100, arq);
-    while(fgets(linha, 100, arq) != NULL){
+    fgets(linha, 1000, arq);
+    /*while(fgets(linha, 300, arq) != NULL){
         printf("%s", linha);
+    }*/
+    fgets(linha, 1000, arq);
+    char matriz[18][1000];
+
+    for (int i = 0; i < 18; i++) {
+        for (int j = 0; j < 1000; j++) {
+            matriz[i][j] = '\0';
+        }
     }
+
+    int pos = 0;
+    for(int i = 0; i < 18; i++){
+        for(int j = pos, k = 0; j < 1000; j++, k++){
+            if(linha[j] != ';' && linha[j] != '\0' && linha[j] != '\n'){
+                matriz[i][k] = linha[j];
+            }
+            else{
+                pos = j+1;
+                j = 1000;
+            }
+            printf("%c", matriz[i][k]);
+        }  
+        printf("\n");  
+    }
+    
 
 }
