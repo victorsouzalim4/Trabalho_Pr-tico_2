@@ -39,8 +39,9 @@ typedef struct{
 int main(){
 
     FILE *arq = fopen("C:/Users/Victor/Documents/FACULDADE/2 semestre/Aeds 2/TP_2/characters.csv", "r");
-
     char linha[1000];
+    char atributos[18][1000];
+    char apelidos[10][100];
 
 
     if(arq == NULL){
@@ -49,32 +50,54 @@ int main(){
     }
 
     fgets(linha, 1000, arq);
+    fgets(linha, 1000, arq);
     /*while(fgets(linha, 300, arq) != NULL){
         printf("%s", linha);
     }*/
-    fgets(linha, 1000, arq);
-    char matriz[18][1000];
 
     for (int i = 0; i < 18; i++) {
-        for (int j = 0; j < 1000; j++) {
-            matriz[i][j] = '\0';
+            for (int j = 0; j < 1000; j++) {
+            atributos[i][j] = '\0';
         }
     }
-
     int pos = 0;
     for(int i = 0; i < 18; i++){
         for(int j = pos, k = 0; j < 1000; j++, k++){
             if(linha[j] != ';' && linha[j] != '\0' && linha[j] != '\n'){
-                matriz[i][k] = linha[j];
+                atributos[i][k] = linha[j];
             }
             else{
                 pos = j+1;
                 j = 1000;
             }
-            printf("%c", matriz[i][k]);
+            //printf("%c", atributos[i][k]);
         }  
-        printf("\n");  
+        //printf("\n");  
     }
-    
 
+
+    for(int i = 0; i < 10; i++){
+        for(int j = 0; j < 100; j++){
+            apelidos[i][j] = '\0';
+        }
+    }
+    pos = 0;
+    for(int i = 0; i < 10; i++){
+        int cont = 0;
+        for(int j = pos, k = 0; j < 100; j++, k++){
+            if(atributos[2][j] == '\''){
+                cont++;
+                j++;
+            }
+            if(cont == 1){
+                apelidos[i][k] = atributos[2][j];
+            }
+            else if(cont == 2){
+                pos = j+1;
+                j = 100; 
+            }
+                printf("%c", apelidos[i][k]);  
+        }
+        printf("\n");
+    }
 }
