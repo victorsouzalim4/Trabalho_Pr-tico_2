@@ -1,6 +1,3 @@
-//modularizacao da funcao "separaApelidos" que parciona os apelidos contidos na string
-
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -89,6 +86,27 @@ void separaApelidos(char apelidos[10][100], char atributos[18][1000]){
     }
 }
 
+bool StringToBoolean(char atributos[18][1000], int indice){
+    char str[1000];
+    bool valorLogico = false;
+
+    for(int i = 0; i < 1000; i++){
+        str[i] = '\0';
+    }
+    for(int i = 0; atributos[indice][i] != '\0'; i++){
+        str[i] = atributos[indice][i];
+    }
+
+    //printf("%s\n", str);
+
+    if(strcmp(str, "VERDADEIRO") == 0){
+        valorLogico = true;
+    }
+
+    //printf("%d", valorLogico);
+
+    return valorLogico;
+}
 int main(){
 
     FILE *arq = fopen("C:/Users/Victor/Documents/FACULDADE/2 semestre/Aeds 2/TP_2/characters.csv", "r");
@@ -113,6 +131,8 @@ int main(){
 
     recebeAtributos(atributos, linha);
     separaApelidos(apelidos, atributos);
+    bool valor = StringToBoolean(atributos, 7);
+  
 
 
 }
