@@ -1,4 +1,5 @@
-//modularizaçao da funcao "recebeAtributos" que faz umm split nos atruibutos do objet
+//modularizacao da funcao "separaApelidos" que parciona os apelidos contidos na string
+
 
 #include <stdio.h>
 #include <string.h>
@@ -54,12 +55,39 @@ void recebeAtributos(char atributos[18][1000], char* linha){
                 pos = j+1;
                 j = 1000;
             }
-            printf("%c", atributos[i][k]);
+            //printf("%c", atributos[i][k]);
         }  
-        printf("\n");  
+        //printf("\n");  
     }
 }
 
+void separaApelidos(char apelidos[10][100], char atributos[18][1000]){
+    
+    for(int i = 0; i < 10; i++){
+        for(int j = 0; j < 100; j++){
+            apelidos[i][j] = '\0';
+        }
+    }
+    int  pos = 0;
+    for(int i = 0; i < 10; i++){
+        int cont = 0;
+        for(int j = pos, k = 0; j < 100; j++, k++){
+            if(atributos[2][j] == '\''){
+                cont++;
+                j++;
+            }
+            if(cont == 1){
+                apelidos[i][k] = atributos[2][j];
+            }
+            else if(cont == 2){
+                pos = j+1;
+                j = 100; 
+            }
+               //printf("%c", apelidos[i][k]);  
+        }
+        //printf("\n");
+    }
+}
 
 int main(){
 
@@ -84,30 +112,7 @@ int main(){
     }*/
 
     recebeAtributos(atributos, linha);
+    separaApelidos(apelidos, atributos);
 
 
-    for(int i = 0; i < 10; i++){
-        for(int j = 0; j < 100; j++){
-            apelidos[i][j] = '\0';
-        }
-    }
-    int  pos = 0;
-    for(int i = 0; i < 10; i++){
-        int cont = 0;
-        for(int j = pos, k = 0; j < 100; j++, k++){
-            if(atributos[2][j] == '\''){
-                cont++;
-                j++;
-            }
-            if(cont == 1){
-                apelidos[i][k] = atributos[2][j];
-            }
-            else if(cont == 2){
-                pos = j+1;
-                j = 100; 
-            }
-               // printf("%c", apelidos[i][k]);  
-        }
-       // printf("\n");
-    }
 }
