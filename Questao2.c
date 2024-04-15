@@ -1,5 +1,8 @@
+//modularizaçao da funcao "recebeAtributos" que faz umm split nos atruibutos do objet
+
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <stdbool.h>
 
 typedef struct{
@@ -35,27 +38,8 @@ typedef struct{
 
 }Personagem;
 
-
-int main(){
-
-    FILE *arq = fopen("C:/Users/Victor/Documents/FACULDADE/2 semestre/Aeds 2/TP_2/characters.csv", "r");
-    char linha[1000];
-    char atributos[18][1000];
-    char apelidos[10][100];
-
-
-    if(arq == NULL){
-        printf("Erro na abertura do arquivo");
-        return 1;
-    }
-
-    fgets(linha, 1000, arq);
-    fgets(linha, 1000, arq);
-    /*while(fgets(linha, 300, arq) != NULL){
-        printf("%s", linha);
-    }*/
-
-    for (int i = 0; i < 18; i++) {
+void recebeAtributos(char atributos[18][1000], char* linha){
+        for (int i = 0; i < 18; i++) {
             for (int j = 0; j < 1000; j++) {
             atributos[i][j] = '\0';
         }
@@ -70,10 +54,36 @@ int main(){
                 pos = j+1;
                 j = 1000;
             }
-            //printf("%c", atributos[i][k]);
+            printf("%c", atributos[i][k]);
         }  
-        //printf("\n");  
+        printf("\n");  
     }
+}
+
+
+int main(){
+
+    FILE *arq = fopen("C:/Users/Victor/Documents/FACULDADE/2 semestre/Aeds 2/TP_2/characters.csv", "r");
+    char linha[1000];
+    char atributos[18][1000];
+    char apelidos[10][100];
+    Personagem* personagens = (Personagem*) malloc (sizeof(Personagem)*405);
+
+
+
+
+    if(arq == NULL){
+        printf("Erro na abertura do arquivo");
+        return 1;
+    }
+
+    fgets(linha, 1000, arq);
+    fgets(linha, 1000, arq);
+    /*while(fgets(linha, 300, arq) != NULL){
+        printf("%s", linha);
+    }*/
+
+    recebeAtributos(atributos, linha);
 
 
     for(int i = 0; i < 10; i++){
@@ -81,7 +91,7 @@ int main(){
             apelidos[i][j] = '\0';
         }
     }
-    pos = 0;
+    int  pos = 0;
     for(int i = 0; i < 10; i++){
         int cont = 0;
         for(int j = pos, k = 0; j < 100; j++, k++){
@@ -96,8 +106,8 @@ int main(){
                 pos = j+1;
                 j = 100; 
             }
-                printf("%c", apelidos[i][k]);  
+               // printf("%c", apelidos[i][k]);  
         }
-        printf("\n");
+       // printf("\n");
     }
 }
