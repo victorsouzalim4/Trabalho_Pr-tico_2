@@ -11,7 +11,7 @@ typedef struct{
 } DateTime;
 
 typedef struct{
-
+    char apelidos[18][1000];
 } Lista;
 
 typedef struct{
@@ -107,6 +107,47 @@ bool StringToBoolean(char atributos[18][1000], int indice){
 
     return valorLogico;
 }
+
+void separaData(char atributos[18][1000], int indice){
+    char day[4]; 
+    char month[4];
+    char year[5]; 
+
+    int pos = 0;
+    int i = 0;
+
+
+    // Ler o dia
+    while (atributos[indice][pos] != '-') {
+        day[i++] = atributos[indice][pos++];
+    }
+    day[i] = '\0';
+    pos++; 
+
+  
+    i = 0;
+    while (atributos[indice][pos] != '-') {
+        month[i++] = atributos[indice][pos++];
+    }
+    month[i] = '\0'; 
+    pos++; 
+
+  
+    i = 0;
+    while (atributos[indice][pos] != '\0') {
+        year[i++] = atributos[indice][pos++];
+    }
+    year[i] = '\0';
+
+    //printf("%s\n", day);
+    //printf("%s\n", month);
+    //printf("%s\n", year);
+}
+
+
+        
+
+
 int main(){
 
     FILE *arq = fopen("C:/Users/Victor/Documents/FACULDADE/2 semestre/Aeds 2/TP_2/characters.csv", "r");
@@ -132,7 +173,11 @@ int main(){
     recebeAtributos(atributos, linha);
     separaApelidos(apelidos, atributos);
     bool valor = StringToBoolean(atributos, 7);
-  
+    /*for(int i = 0; atributos[12][i] != '\0'; i++){
+        printf("%c", atributos[12][i]);
+    }*/
+    separaData(atributos, 12);
+    
 
 
 }
