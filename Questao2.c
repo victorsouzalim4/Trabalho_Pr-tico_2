@@ -117,7 +117,6 @@ void separaData(char atributos[18][1000], int indice){
     int i = 0;
 
 
-    // Ler o dia
     while (atributos[indice][pos] != '-') {
         day[i++] = atributos[indice][pos++];
     }
@@ -144,7 +143,21 @@ void separaData(char atributos[18][1000], int indice){
     //printf("%s\n", year);
 }
 
+void StringToInt(char atributos[18][1000], int indice){
+    char str[5]; 
+    for(int i = 0; i < 5; i++){
+        str[i] = atributos[indice][i];
+    }
+    char *endptr; 
+    int valor = strtol(str, &endptr, 10); 
 
+    if (*endptr != '\0') {
+        printf("Erro: A string não é um número válido.\n");
+    } else {
+        printf("Valor convertido: %d\n", valor);
+    }
+
+}
         
 
 
@@ -173,10 +186,8 @@ int main(){
     recebeAtributos(atributos, linha);
     separaApelidos(apelidos, atributos);
     bool valor = StringToBoolean(atributos, 7);
-    /*for(int i = 0; atributos[12][i] != '\0'; i++){
-        printf("%c", atributos[12][i]);
-    }*/
     separaData(atributos, 12);
+    StringToInt(atributos, 13);
     
 
 
