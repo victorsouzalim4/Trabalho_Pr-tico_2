@@ -175,7 +175,7 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
         str[i] = atributos[0][i];
     }
     strcpy(personagem[posicao].id, str);
-    printf("%s ", personagem[posicao].id);
+ 
 
 
 
@@ -188,7 +188,7 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
         str[i] = atributos[1][i];
     }
     strcpy(personagem[posicao].name, str);
-    printf("%s ", personagem[posicao].name);
+   
 
 
 
@@ -200,13 +200,13 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
                     cont++;
                 }
                     str[j] = apelidos[i][j];
-                    printf("%c", str[j]);
+                    //printf("%c", str[j]);
                     strcpy(personagem[posicao].alternate_names.apelidos[i], str);
                  
 
         }
         if(cont != 0){
-            printf("%s,",personagem[posicao].alternate_names.apelidos[i]);
+            //printf("%s,",personagem[posicao].alternate_names.apelidos[i]);
         }
         
     }
@@ -228,7 +228,7 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
         str[i] = atributos[3][i];
     }
     strcpy(personagem[posicao].house, str);
-    printf(" %s ", personagem[posicao].house);
+    
 
 
 
@@ -242,7 +242,7 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
         str[i] = atributos[4][i];
     }
     strcpy(personagem[posicao].ancestry, str);
-    printf("%s ", personagem[posicao].ancestry);
+    
 
 
 
@@ -257,7 +257,7 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
         str[i] = atributos[5][i];
     }
     strcpy(personagem[posicao].species, str);
-    printf("%s ", personagem[posicao].species);
+    
 
 
 
@@ -273,7 +273,7 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
         str[i] = atributos[6][i];
     }
     strcpy(personagem[posicao].patronus, str);
-    printf("%s ", personagem[posicao].patronus);
+    
 
 
 
@@ -287,7 +287,7 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
     else{
         personagem[posicao].hogwartsStaff = false;
     }
-    printf("%d ", personagem[posicao].hogwartsStaff);
+    
 
 
 
@@ -301,7 +301,7 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
     else{
         personagem[posicao].hogwartsStudent = false;
     }
-    printf("%d ", personagem[posicao].hogwartsStudent);
+    
 
 
 
@@ -315,7 +315,7 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
         str[i] = atributos[9][i];
     }
     strcpy(personagem[posicao].actorName, str);
-    printf("%s ", personagem[posicao].actorName);
+    
 
 
 
@@ -330,7 +330,7 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
     else{
         personagem[posicao].alive = false;
     }
-    printf("%d ", personagem[posicao].alive);
+    
 
 
 
@@ -339,9 +339,7 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
 
 
     separaData(personagem,atributos, 12, posicao);
-    printf("%s-", personagem[posicao].dateOfBirth.day);
-    printf("%s-", personagem[posicao].dateOfBirth.month);
-    printf("%s ", personagem[posicao].dateOfBirth.year);
+
 
 
 
@@ -350,7 +348,7 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
 
     int ano = StringToInt(atributos, 13);
     personagem[posicao].yearOfBirth = ano;
-    printf("%d ", personagem[posicao].yearOfBirth);
+    
 
 
 
@@ -365,7 +363,7 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
         str[i] = atributos[14][i];
     }
     strcpy(personagem[posicao].eyeColour, str);
-    printf("%s ", personagem[posicao].eyeColour);
+    
 
 
 
@@ -381,7 +379,7 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
         str[i] = atributos[15][i];
     }
     strcpy(personagem[posicao].gender, str);
-    printf("%s ", personagem[posicao].gender);
+    
 
 
 
@@ -395,7 +393,7 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
         str[i] = atributos[16][i];
     }
     strcpy(personagem[posicao].hairColour, str);
-    printf("%s ", personagem[posicao].hairColour);
+    
 
 
     valor = StringToBoolean(atributos, 17);
@@ -405,9 +403,62 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
     else{
         personagem[posicao].wizard = false;
     }
-    printf("%d\n", personagem[posicao].wizard);
+    
 }   
 
+void imprimePersonagem(Personagem personagens[], int indice){
+       printf("%s ", personagens[indice].id);
+       printf("%s ", personagens[indice].name);
+
+       for(int i = 0; i < 10; i++){
+            int cont = 0;
+            if(personagens[indice].alternate_names.apelidos[i][0] > 'a' && personagens[indice].alternate_names.apelidos[i][0] < 'z'){
+                cont++;
+            }
+            if(cont != 0){
+                 printf("%s ", personagens[indice].alternate_names.apelidos[i]);
+            }
+        }
+    
+       printf("%s ", personagens[indice].house);
+       printf("%s ", personagens[indice].ancestry);
+       printf("%s ", personagens[indice].species);
+       printf("%s ", personagens[indice].patronus);
+        if(personagens[indice].hogwartsStaff == true){
+          printf("true ");
+       }
+       else{
+          printf("false ");
+       }
+       if(personagens[indice].hogwartsStudent == true){
+          printf("true ");
+       }
+       else{
+          printf("false ");
+       }
+       printf("%s ", personagens[indice].actorName);
+       if(personagens[indice].alive == true){
+          printf("true ");
+       }
+       else{
+          printf("false ");
+       }
+       printf("%s-", personagens[indice].dateOfBirth.day);
+       printf("%s-", personagens[indice].dateOfBirth.month);
+       printf("%s ", personagens[indice].dateOfBirth.year);
+       printf("%d ", personagens[indice].yearOfBirth);
+       printf("%s ", personagens[indice].eyeColour);
+       printf("%s ", personagens[indice].gender);
+       printf("%s ", personagens[indice].hairColour);
+
+       if(personagens[indice].wizard == true){
+          printf("true\n");
+       }
+       else{
+          printf("false\n");
+       }
+       
+}
 
 int main(){
 
@@ -432,6 +483,10 @@ int main(){
         separaApelidos(apelidos, atributos);
         ConstroiPersonagem(atributos, apelidos, personagens, i);
         i++;
+    }
+
+    for(int i = 0; i < 3; i++){
+        imprimePersonagem(personagens, i);
     }
 
  
