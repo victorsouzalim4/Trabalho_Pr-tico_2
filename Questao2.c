@@ -473,6 +473,15 @@ bool isIgual(char str[], char id[]){
     return test;
 }
 
+bool isFim(char str[]){
+    bool test = true;
+
+    if(str[0] == 'F' && str[1] == 'I' && str[2] == 'M'){
+        test = false;
+    }
+
+    return test;
+}
 int main(){
 
     FILE *arq = fopen("C:/Users/Victor/Documents/FACULDADE/2 semestre/Aeds 2/TP_2/characters.csv", "r");
@@ -506,15 +515,16 @@ int main(){
 
     fgets(teste, 100, stdin);
 
-    for(int i = 0; i < 3; i++){
-        if(isIgual(teste, personagens[i].id)){
-            imprimePersonagem(personagens, i);
+    while(isFim(teste)){
+        for(int i = 0; i < 405; i++){
+            if(isIgual(teste, personagens[i].id)){
+                imprimePersonagem(personagens, i);
+            }
         }
-        
+        fgets(teste, 100, stdin);
     }
 
+
+
  
-    
-
-
 }
