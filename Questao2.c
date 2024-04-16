@@ -84,6 +84,7 @@ void separaApelidos(char apelidos[10][100], char atributos[18][1000]){
         }
         //printf("\n");
     }
+
 }
 
 bool StringToBoolean(char atributos[18][1000], int indice){
@@ -108,7 +109,7 @@ bool StringToBoolean(char atributos[18][1000], int indice){
     return valorLogico;
 }
 
-void separaData(char atributos[18][1000], int indice){
+void separaData(Personagem personagem[405], char atributos[18][1000], int indice, int num){
     char day[4]; 
     char month[4];
     char year[5]; 
@@ -138,12 +139,13 @@ void separaData(char atributos[18][1000], int indice){
     }
     year[i] = '\0';
 
-    //printf("%s\n", day);
-    //printf("%s\n", month);
-    //printf("%s\n", year);
+    strcpy(personagem[num].dateOfBirth.day, day);
+    strcpy(personagem[num].dateOfBirth.month, month);
+    strcpy(personagem[num].dateOfBirth.year, year);
+
 }
 
-void StringToInt(char atributos[18][1000], int indice){
+int StringToInt(char atributos[18][1000], int indice){
     char str[5]; 
     for(int i = 0; i < 5; i++){
         str[i] = atributos[indice][i];
@@ -152,13 +154,259 @@ void StringToInt(char atributos[18][1000], int indice){
     int valor = strtol(str, &endptr, 10); 
 
     if (*endptr != '\0') {
-        printf("Erro: A string não é um número válido.\n");
+        //printf("Erro: A string não é um número válido.\n");
     } else {
-        printf("Valor convertido: %d\n", valor);
+        //printf("Valor convertido: %d\n", valor);
     }
 
+    return valor;
+
 }
+
+void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Personagem* personagem, int posicao){
+    
+    char str[1000];
+    
+    for(int i = 0; i < 1000; i++){
+        str[i] = '\0';
+    }
+
+    for(int i = 0; atributos[0][i] != '\0'; i++){
+        str[i] = atributos[0][i];
+    }
+    strcpy(personagem[posicao].id, str);
+    printf("%s ", personagem[posicao].id);
+
+
+
+
+    for(int i = 0; i < 1000; i++){
+        str[i] = '\0';
+    }
+
+    for(int i = 0; atributos[1][i] != '\0'; i++){
+        str[i] = atributos[1][i];
+    }
+    strcpy(personagem[posicao].name, str);
+    printf("%s ", personagem[posicao].name);
+
+
+
+
+        for(int i = 0; i < 10; i++){
+            int cont = 0;
+            for(int j = 0; j < 100; j++){
+                if(apelidos[i][j] > 'a' && apelidos[i][j] < 'z'){
+                    cont++;
+                }
+                    str[j] = apelidos[i][j];
+                    printf("%c", str[j]);
+                    strcpy(personagem[posicao].alternate_names.apelidos[i], str);
+                 
+
+        }
+        if(cont != 0){
+            printf("%s,",personagem[posicao].alternate_names.apelidos[i]);
+        }
         
+    }
+
+    
+
+
+
+
+
+
+
+
+    for(int i = 0; i < 1000; i++){
+        str[i] = '\0';
+    }
+
+    for(int i = 0; atributos[3][i] != '\0'; i++){
+        str[i] = atributos[3][i];
+    }
+    strcpy(personagem[posicao].house, str);
+    printf(" %s ", personagem[posicao].house);
+
+
+
+
+
+    for(int i = 0; i < 1000; i++){
+        str[i] = '\0';
+    }
+
+    for(int i = 0; atributos[4][i] != '\0'; i++){
+        str[i] = atributos[4][i];
+    }
+    strcpy(personagem[posicao].ancestry, str);
+    printf("%s ", personagem[posicao].ancestry);
+
+
+
+
+
+
+    for(int i = 0; i < 1000; i++){
+        str[i] = '\0';
+    }
+
+    for(int i = 0; atributos[5][i] != '\0'; i++){
+        str[i] = atributos[5][i];
+    }
+    strcpy(personagem[posicao].species, str);
+    printf("%s ", personagem[posicao].species);
+
+
+
+
+
+
+
+    for(int i = 0; i < 1000; i++){
+        str[i] = '\0';
+    }
+
+    for(int i = 0; atributos[6][i] != '\0'; i++){
+        str[i] = atributos[6][i];
+    }
+    strcpy(personagem[posicao].patronus, str);
+    printf("%s ", personagem[posicao].patronus);
+
+
+
+
+
+
+    bool valor = StringToBoolean(atributos, 7);
+    if(valor == true){
+        personagem[posicao].hogwartsStaff = true;
+    }
+    else{
+        personagem[posicao].hogwartsStaff = false;
+    }
+    printf("%d ", personagem[posicao].hogwartsStaff);
+
+
+
+
+
+
+    valor = StringToBoolean(atributos, 8);
+    if(valor == true){
+        personagem[posicao].hogwartsStudent = true;
+    }
+    else{
+        personagem[posicao].hogwartsStudent = false;
+    }
+    printf("%d ", personagem[posicao].hogwartsStudent);
+
+
+
+
+
+    for(int i = 0; i < 1000; i++){
+        str[i] = '\0';
+    }
+
+    for(int i = 0; atributos[9][i] != '\0'; i++){
+        str[i] = atributos[9][i];
+    }
+    strcpy(personagem[posicao].actorName, str);
+    printf("%s ", personagem[posicao].actorName);
+
+
+
+
+
+
+
+    valor = StringToBoolean(atributos, 10);
+    if(valor == true){
+        personagem[posicao].alive = true;
+    }
+    else{
+        personagem[posicao].alive = false;
+    }
+    printf("%d ", personagem[posicao].alive);
+
+
+
+
+
+
+
+    separaData(personagem,atributos, 12, posicao);
+    printf("%s-", personagem[posicao].dateOfBirth.day);
+    printf("%s-", personagem[posicao].dateOfBirth.month);
+    printf("%s ", personagem[posicao].dateOfBirth.year);
+
+
+
+
+
+
+    int ano = StringToInt(atributos, 13);
+    personagem[posicao].yearOfBirth = ano;
+    printf("%d ", personagem[posicao].yearOfBirth);
+
+
+
+
+
+
+    for(int i = 0; i < 1000; i++){
+        str[i] = '\0';
+    }
+
+    for(int i = 0; atributos[14][i] != '\0'; i++){
+        str[i] = atributos[14][i];
+    }
+    strcpy(personagem[posicao].eyeColour, str);
+    printf("%s ", personagem[posicao].eyeColour);
+
+
+
+
+
+
+
+    for(int i = 0; i < 1000; i++){
+        str[i] = '\0';
+    }
+
+    for(int i = 0; atributos[15][i] != '\0'; i++){
+        str[i] = atributos[15][i];
+    }
+    strcpy(personagem[posicao].gender, str);
+    printf("%s ", personagem[posicao].gender);
+
+
+
+
+
+    for(int i = 0; i < 1000; i++){
+        str[i] = '\0';
+    }
+
+    for(int i = 0; atributos[16][i] != '\0'; i++){
+        str[i] = atributos[16][i];
+    }
+    strcpy(personagem[posicao].hairColour, str);
+    printf("%s ", personagem[posicao].hairColour);
+
+
+    valor = StringToBoolean(atributos, 17);
+    if(valor == true){
+        personagem[posicao].wizard = true;
+    }
+    else{
+        personagem[posicao].wizard = false;
+    }
+    printf("%d\n", personagem[posicao].wizard);
+}   
 
 
 int main(){
@@ -178,16 +426,15 @@ int main(){
     }
 
     fgets(linha, 1000, arq);
-    fgets(linha, 1000, arq);
-    /*while(fgets(linha, 300, arq) != NULL){
-        printf("%s", linha);
-    }*/
+    int i = 0;
+    while(fgets(linha, 300, arq) != NULL){
+        recebeAtributos(atributos, linha);
+        separaApelidos(apelidos, atributos);
+        ConstroiPersonagem(atributos, apelidos, personagens, i);
+        i++;
+    }
 
-    recebeAtributos(atributos, linha);
-    separaApelidos(apelidos, atributos);
-    bool valor = StringToBoolean(atributos, 7);
-    separaData(atributos, 12);
-    StringToInt(atributos, 13);
+ 
     
 
 
