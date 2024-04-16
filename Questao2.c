@@ -460,6 +460,19 @@ void imprimePersonagem(Personagem personagens[], int indice){
        
 }
 
+bool isIgual(char str[], char id[]){
+    bool test = true;
+    int tam = strlen(id) -1 ;
+    for(int i = 0; i < tam; i++){
+        if(str[i] != id[i]){
+            test = false;
+            i = tam;
+        }
+    }
+
+    return test;
+}
+
 int main(){
 
     FILE *arq = fopen("C:/Users/Victor/Documents/FACULDADE/2 semestre/Aeds 2/TP_2/characters.csv", "r");
@@ -485,8 +498,19 @@ int main(){
         i++;
     }
 
+    char teste[100];
+
+    for(int i = 0; i < 100; i++){
+        teste[i] = '\0';
+    }
+
+    fgets(teste, 100, stdin);
+
     for(int i = 0; i < 3; i++){
-        imprimePersonagem(personagens, i);
+        if(isIgual(teste, personagens[i].id)){
+            imprimePersonagem(personagens, i);
+        }
+        
     }
 
  
