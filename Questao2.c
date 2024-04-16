@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -519,8 +520,11 @@ int main(){
         for(int i = 0; i < 405; i++){
             if(isIgual(teste, personagens[i].id)){
                 imprimePersonagem(personagens, i);
+                i = 405;
             }
         }
+       
+        setbuf(stdin, NULL);
         fgets(teste, 100, stdin);
     }
 
