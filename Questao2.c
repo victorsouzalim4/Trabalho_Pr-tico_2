@@ -408,9 +408,10 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
 }   
 
 void imprimePersonagem(Personagem personagens[], int indice){
-       printf("%s ", personagens[indice].id);
-       printf("%s ", personagens[indice].name);
+       printf("[%s ## ", personagens[indice].id);
+       printf("%s ## ", personagens[indice].name);
 
+        printf(" { ");
        for(int i = 0; i < 10; i++){
             int cont = 0;
             if(personagens[indice].alternate_names.apelidos[i][0] > 'a' && personagens[indice].alternate_names.apelidos[i][0] < 'z'){
@@ -420,43 +421,44 @@ void imprimePersonagem(Personagem personagens[], int indice){
                  printf("%s ", personagens[indice].alternate_names.apelidos[i]);
             }
         }
+         printf(" } ## ");
     
-       printf("%s ", personagens[indice].house);
-       printf("%s ", personagens[indice].ancestry);
-       printf("%s ", personagens[indice].species);
-       printf("%s ", personagens[indice].patronus);
+       printf("%s ## ", personagens[indice].house);
+       printf("%s ## ", personagens[indice].ancestry);
+       printf("%s ## ", personagens[indice].species);
+       printf("%s ## ", personagens[indice].patronus);
         if(personagens[indice].hogwartsStaff == true){
-          printf("true ");
+          printf("true ## ");
        }
        else{
-          printf("false ");
+          printf("false ## ");
        }
        if(personagens[indice].hogwartsStudent == true){
-          printf("true ");
+          printf("true ## ");
        }
        else{
-          printf("false ");
+          printf("false ## ");
        }
        printf("%s ", personagens[indice].actorName);
        if(personagens[indice].alive == true){
-          printf("true ");
+          printf("true ## ");
        }
        else{
-          printf("false ");
+          printf("false ## ");
        }
        printf("%s-", personagens[indice].dateOfBirth.day);
        printf("%s-", personagens[indice].dateOfBirth.month);
-       printf("%s ", personagens[indice].dateOfBirth.year);
-       printf("%d ", personagens[indice].yearOfBirth);
-       printf("%s ", personagens[indice].eyeColour);
-       printf("%s ", personagens[indice].gender);
-       printf("%s ", personagens[indice].hairColour);
+       printf("%s ## ", personagens[indice].dateOfBirth.year);
+       printf("%d ## ", personagens[indice].yearOfBirth);
+       printf("%s ## ", personagens[indice].eyeColour);
+       printf("%s ## ", personagens[indice].gender);
+       printf("%s ## ", personagens[indice].hairColour);
 
        if(personagens[indice].wizard == true){
-          printf("true\n");
+          printf("true]\n");
        }
        else{
-          printf("false\n");
+          printf("false]\n");
        }
        
 }
@@ -485,7 +487,7 @@ bool isFim(char str[]){
 }
 int main(){
 
-    FILE *arq = fopen("C:/Users/Victor/Documents/FACULDADE/2 semestre/Aeds 2/TP_2/characters.csv", "r");
+    FILE *arq = fopen("/tmp/characters.csv", "r");
     char linha[1000];
     char atributos[18][1000];
     char apelidos[10][100];
