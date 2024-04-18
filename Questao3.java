@@ -366,6 +366,24 @@ class Personagem {
 
 public class Questao3 {
 
+    public static void isInVetor(Personagem vetor[], String name){
+        Boolean test = false;
+
+        for(int i = 0; i < vetor.length; i++){
+            if(vetor[i] != null && vetor[i].getName().equals(name)){
+                test = true;
+                i = vetor.length;
+            }
+        }
+
+        if(test == false){
+            System.out.println("NAO");
+        }
+        else{
+            System.out.println("SIM");
+        }
+    }
+
     public static int RegistraVetor(Personagem personagem[], Personagem vetor[], String id, int j){
         for(int i = 0; i < 405; i++){
             if(personagem[i].getId().equals(id)){
@@ -434,7 +452,7 @@ public class Questao3 {
         Personagem personagem[] = new Personagem[405];
         Personagem vetor[] = new Personagem[50];
         try {
-            File myObj = new File("C:/Users/Victor/Documents/FACULDADE/2 semestre/Aeds 2/TP_2/characters.csv");
+            File myObj = new File("/tmp/characters.csv");
             Scanner Sc = new Scanner(myObj);
             Sc.nextLine();
 
@@ -470,11 +488,21 @@ public class Questao3 {
             id = Sc.nextLine();
         }
 
-        for(int i = 0; i < 50; i++){
+        String name = Sc.nextLine();
+
+        while(isFim(name)){
+            isInVetor(vetor, name);
+            name = Sc.nextLine();
+        }
+        
+        
+        
+        
+        /*for(int i = 0; i < 50; i++){
             if(vetor[i] != null){
                 vetor[i].imprime();
             }
-        }
+        }*/
 
         //Personagem test = personagem[2].clone(personagem[2]);
         //test.imprime();
