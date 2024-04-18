@@ -366,6 +366,19 @@ class Personagem {
 
 public class Questao3 {
 
+    public static int RegistraVetor(Personagem personagem[], Personagem vetor[], String id, int j){
+        for(int i = 0; i < 405; i++){
+            if(personagem[i].getId().equals(id)){
+                vetor[j] = personagem[i].clone(personagem[i]);
+                j++;
+                i = 405;
+            }
+    
+        }
+
+        return j;
+    }
+
     public static void getObjeto(String id, Personagem personagem[]) {
         for (int i = 0; i < personagem.length; i++) {
             if (personagem[i].getId().equals(id)) {
@@ -453,16 +466,17 @@ public class Questao3 {
         String id = Sc.nextLine();
         int j = 0;
         while (isFim(id)) {
-            for(int i = 0; i < 405; i++){
-                if(personagem[i].getId().equals(id)){
-                    vetor[j] = personagem[i].clone(personagem[i]);
-                }
-        
-            }
+            j = RegistraVetor(personagem, vetor, id, j);
             id = Sc.nextLine();
         }
 
-        Personagem test = personagem[2].clone(personagem[2]);
+        for(int i = 0; i < 50; i++){
+            if(vetor[i] != null){
+                vetor[i].imprime();
+            }
+        }
+
+        //Personagem test = personagem[2].clone(personagem[2]);
         //test.imprime();
 
     }
