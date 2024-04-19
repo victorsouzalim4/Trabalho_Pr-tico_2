@@ -399,8 +399,19 @@ public class Questao7 {
                     if(vetor[j-1].getDateOfBirth().getMonth().compareTo(menor.getDateOfBirth().getMonth()) >= 0){
                         if(vetor[j-1].getDateOfBirth().getMonth().compareTo(menor.getDateOfBirth().getMonth()) == 0){
                             if(vetor[j-1].getDateOfBirth().getDay().compareTo(menor.getDateOfBirth().getDay()) >= 0){
-                                vetor[j] = vetor[j - 1].clone(vetor[j-1]);
-                                j--;
+                                if(vetor[j-1].getDateOfBirth().getDay().compareTo(menor.getDateOfBirth().getDay()) == 0){
+                                    if(vetor[j-1].getName().compareTo(menor.getName()) > 0){
+                                        vetor[j] = vetor[j - 1].clone(vetor[j-1]);
+                                        j--;
+                                    }
+                                    else{
+                                        test = false;
+                                    }
+                                    
+                                }else{
+                                    vetor[j] = vetor[j - 1].clone(vetor[j-1]);
+                                    j--;
+                                }   
                             }
                             else{
                                 test = false;
