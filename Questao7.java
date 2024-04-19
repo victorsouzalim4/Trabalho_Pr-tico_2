@@ -391,10 +391,34 @@ public class Questao7 {
         
         for (int i = 1; vetor[i] != null && i < vetor.length; i++) {
             Personagem menor = vetor[i].clone(vetor[i]);
+            //String s =  new String(vetor[i].getDateOfBirth().getYear());
             int j = i;
-            while (j > 0 && vetor[j-1].getName().compareTo(menor.getName()) > 0 ) {
-                vetor[j] = vetor[j - 1].clone(vetor[j-1]);
-                j--;
+            Boolean test = true;
+            while (test == true && j > 0 && vetor[j-1].getDateOfBirth().getYear().compareTo(menor.getDateOfBirth().getYear()) >= 0 ) {
+                if(vetor[j-1].getDateOfBirth().getYear().compareTo(menor.getDateOfBirth().getYear()) == 0){
+                    if(vetor[j-1].getDateOfBirth().getMonth().compareTo(menor.getDateOfBirth().getMonth()) >= 0){
+                        if(vetor[j-1].getDateOfBirth().getMonth().compareTo(menor.getDateOfBirth().getMonth()) == 0){
+                            if(vetor[j-1].getDateOfBirth().getDay().compareTo(menor.getDateOfBirth().getDay()) >= 0){
+                                vetor[j] = vetor[j - 1].clone(vetor[j-1]);
+                                j--;
+                            }
+                            else{
+                                test = false;
+                            }
+                        }else{
+                            vetor[j] = vetor[j - 1].clone(vetor[j-1]);
+                            j--;
+                        }
+
+                    }else{
+                        vetor[j] = vetor[j - 1].clone(vetor[j-1]);
+                        j--;
+                    }
+                }else{
+                    vetor[j] = vetor[j - 1].clone(vetor[j-1]);
+                    j--;
+                }
+
             }
             vetor[j] = menor.clone(menor);
 
