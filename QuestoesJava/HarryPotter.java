@@ -1,3 +1,4 @@
+package QuestoesJava;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -339,188 +340,11 @@ class Personagem {
     }
 
     public Personagem clone(Personagem personagem) {
-
-        Personagem clone = new Personagem(
-            personagem.getId(),
-            personagem.getName(),
-            personagem.getAlternate_names(),
-            personagem.getHouse(),
-            personagem.getAncestry(),
-            personagem.getSpecies(),
-            personagem.getPatronus(),
-            personagem.getHogwartsStaff(),
-            personagem.getHogwartsStudent(),
-            personagem.getActorName(),
-            personagem.getAlive(),
-            personagem.getDateOfBirth(),
-            personagem.getYearOfBirth(),
-            personagem.getEyeColour(),
-            personagem.getGender(),
-            personagem.getHairColour(),
-            personagem.getWizard()
-        );
-
-        return clone;
+        return personagem;
     }
 }
 
-public class Questao18 {
-
-    public static int whereNull(Personagem vetor[]){
-        int pos = vetor.length - 1;
-
-        for(int i = 0; i < vetor.length; i++){
-            if(vetor[i] == null){
-                pos = i;
-                i = vetor.length;
-            }
-        }
-
-        return pos;
-    }
-
-    public static void swap(Personagem vetor[], int i, int j ){
-        Personagem tmp = vetor[i].clone(vetor[i]);
-        vetor[i] = vetor[j].clone(vetor[j]);
-        vetor[j] = tmp.clone(tmp);
-    }
-
-
-
-    public static void SelectionSort(Personagem vetor[]){
-        for(int i = 0; i < vetor.length - 1 && vetor[i] != null; i++){
-            String maior = new String(vetor[i].getName());
-            int tmp = i;
-            for(int j = i + 1; j < vetor.length; j++){
-                if(vetor[j] != null && vetor[j].getName().compareTo(maior) < 0){
-                    maior = new String(vetor[j].getName());
-                    tmp = j;
-                    //System.out.println(maior);
-                }
-            }
-            swap(vetor, i, tmp);
-        }
-    }
-
-
-
-
-    public static void QuickSort(Personagem vetor[], int esq, int dir) {
-        if (esq < dir && esq < 10) {
-            int indicePivot = partition(vetor, esq, dir);
-            QuickSort(vetor, esq, indicePivot - 1);
-            QuickSort(vetor, indicePivot + 1, dir);
-        }
-    }
-    
-    private static int partition(Personagem vetor[], int esq, int dir) {
-        Personagem pivot = vetor[dir];
-        int i = esq - 1;
-    
-        for (int j = esq; j < dir; j++) {
-            if (compare(vetor[j], pivot) <= 0) {
-                i++;
-                swap(vetor, i, j);
-            }
-        }
-    
-        swap(vetor, i + 1, dir);
-        return i + 1;
-    }
-    
-    private static int compare(Personagem a, Personagem b) {
-        int houseComparison = a.getHouse().compareTo(b.getHouse());
-        if (houseComparison != 0) {
-            return houseComparison;
-        } else {
-            return a.getName().compareTo(b.getName());
-        }
-    }
-    
-
-    
-    public static void InsertionSort(Personagem vetor[]){
-        
-        for (int i = 1; vetor[i] != null && i < vetor.length; i++) {
-            Personagem menor = vetor[i].clone(vetor[i]);
-            //String s =  new String(vetor[i].getDateOfBirth().getYear());
-            int j = i;
-            Boolean test = true;
-            while (test == true && j > 0 && vetor[j-1].getDateOfBirth().getYear().compareTo(menor.getDateOfBirth().getYear()) >= 0 ) {
-                if(vetor[j-1].getDateOfBirth().getYear().compareTo(menor.getDateOfBirth().getYear()) == 0){
-                    if(vetor[j-1].getDateOfBirth().getMonth().compareTo(menor.getDateOfBirth().getMonth()) >= 0){
-                        if(vetor[j-1].getDateOfBirth().getMonth().compareTo(menor.getDateOfBirth().getMonth()) == 0){
-                            if(vetor[j-1].getDateOfBirth().getDay().compareTo(menor.getDateOfBirth().getDay()) >= 0){
-                                if(vetor[j-1].getDateOfBirth().getDay().compareTo(menor.getDateOfBirth().getDay()) == 0){
-                                    if(vetor[j-1].getName().compareTo(menor.getName()) > 0){
-                                        vetor[j] = vetor[j - 1].clone(vetor[j-1]);
-                                        j--;
-                                    }
-                                    else{
-                                        test = false;
-                                    }
-                                    
-                                }else{
-                                    vetor[j] = vetor[j - 1].clone(vetor[j-1]);
-                                    j--;
-                                }   
-                            }
-                            else{
-                                test = false;
-                            }
-                        }else{
-                            vetor[j] = vetor[j - 1].clone(vetor[j-1]);
-                            j--;
-                        }
-
-                    }else{
-                        vetor[j] = vetor[j - 1].clone(vetor[j-1]);
-                        j--;
-                    }
-                }else{
-                    vetor[j] = vetor[j - 1].clone(vetor[j-1]);
-                    j--;
-                }
-
-            }
-            vetor[j] = menor.clone(menor);
-
-        }
-    }
-
-    public static void isInVetor(Personagem vetor[], String name){
-        Boolean test = false;
-
-        for(int i = 0; i < vetor.length; i++){
-            if(vetor[i] != null && vetor[i].getName().equals(name)){
-                test = true;
-                i = vetor.length;
-            }
-        }
-
-        if(test == false){
-            System.out.println("NAO");
-        }
-        else{
-            System.out.println("SIM");
-        }
-    }
-
-
-
-
-    public static int RegistraVetor(Personagem personagem[], Personagem vetor[], String id, int j){
-        for(int i = 0; i < 405; i++){
-            if(personagem[i].getId().equals(id)){
-                vetor[j] = personagem[i].clone(personagem[i]);
-                j++;
-                i = 405;
-            }
-    
-        }
-
-        return j;
-    }
+public class HarryPotter {
 
     public static void getObjeto(String id, Personagem personagem[]) {
         for (int i = 0; i < personagem.length; i++) {
@@ -575,7 +399,6 @@ public class Questao18 {
 
     public static void main(String[] args) {
         Personagem personagem[] = new Personagem[405];
-        Personagem vetor[] = new Personagem[50];
         try {
             File myObj = new File("/tmp/characters.csv");
             Scanner Sc = new Scanner(myObj);
@@ -594,7 +417,7 @@ public class Questao18 {
                 personagem[i] = new Personagem(atributos[0], atributos[1], list, atributos[3], atributos[4],
                         atributos[5], atributos[6], false, false,
                         atributos[9], false, data, ano, atributos[14], atributos[15],
-                        atributos[16], stringToBoolean(atributos[17]));
+                        atributos[16], false);
                 i++;
             }
 
@@ -607,24 +430,9 @@ public class Questao18 {
         Scanner Sc = new Scanner(System.in);
 
         String id = Sc.nextLine();
-        int j = 0;
         while (isFim(id)) {
-            j = RegistraVetor(personagem, vetor, id, j);
+            getObjeto(id, personagem);
             id = Sc.nextLine();
-        }
-
-        //SelectionSort(vetor);
-        //InsertionSort(vetor);
-
-        int test = whereNull(vetor);
-        //System.out.println(test);
-
-
-
-        QuickSort(vetor, 0, test - 1);
-
-        for(int i = 0; vetor[i] != null && i < 10; i++){
-            vetor[i].imprime();
         }
 
     }

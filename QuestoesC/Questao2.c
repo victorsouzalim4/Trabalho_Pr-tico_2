@@ -1,4 +1,5 @@
 
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -195,21 +196,25 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
 
 
         for(int i = 0; i < 10; i++){
+            char str1[100];
+            for(int i = 0; i < 1000; i++){
+                str1[i] = '\0';
+            }
             int cont = 0;
             for(int j = 0; j < 100; j++){
                 if(apelidos[i][j] > 'a' && apelidos[i][j] < 'z'){
                     cont++;
                 }
-                    str[j] = apelidos[i][j];
-                    //printf("%c", str[j]);
-                    strcpy(personagem[posicao].alternate_names.apelidos[i], str);
+                    str1[j] = apelidos[i][j];
+                    printf("%c", str1[j]);
+                    //strcpy(personagem[posicao].alternate_names.apelidos[i], str);
                  
 
-        }
-        if(cont != 0){
-            //printf("%s,",personagem[posicao].alternate_names.apelidos[i]);
-        }
-        
+            }
+            printf("\n%s", str1);
+            if(cont != 0){
+                //printf("%s,",personagem[posicao].alternate_names.apelidos[i]);
+            }   
     }
 
     
@@ -487,7 +492,7 @@ bool isFim(char str[]){
 }
 int main(){
 
-    FILE *arq = fopen("/tmp/characters.csv", "r");
+    FILE *arq = fopen("C:/Users/Victor/Documents/FACULDADE/2 semestre/Aeds 2/TP_2/characters.csv", "r");
     char linha[1000];
     char atributos[18][1000];
     char apelidos[10][100];
@@ -503,11 +508,12 @@ int main(){
 
     fgets(linha, 1000, arq);
     int i = 0;
-    while(fgets(linha, 300, arq) != NULL){
+    while(fgets(linha, 300, arq) != NULL && i < 3){
         recebeAtributos(atributos, linha);
         separaApelidos(apelidos, atributos);
         ConstroiPersonagem(atributos, apelidos, personagens, i);
         i++;
+        printf("entrei");
     }
 
     char teste[100];
@@ -517,8 +523,9 @@ int main(){
     }
 
     fgets(teste, 100, stdin);
+    imprimePersonagem(personagens, 0);
 
-    while(isFim(teste)){
+    /*while(isFim(teste)){
         for(int i = 0; i < 405; i++){
             if(isIgual(teste, personagens[i].id)){
                 imprimePersonagem(personagens, i);
@@ -528,7 +535,7 @@ int main(){
        
         setbuf(stdin, NULL);
         fgets(teste, 100, stdin);
-    }
+    }*/
 
 
 

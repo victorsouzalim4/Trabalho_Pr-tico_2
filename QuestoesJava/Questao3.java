@@ -1,3 +1,4 @@
+package QuestoesJava;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -452,7 +453,7 @@ public class Questao3 {
         Personagem personagem[] = new Personagem[405];
         Personagem vetor[] = new Personagem[50];
         try {
-            File myObj = new File("/tmp/characters.csv");
+            File myObj = new File("C:/Users/Victor/Documents/FACULDADE/2 semestre/Aeds 2/TP_2/characters.csv");
             Scanner Sc = new Scanner(myObj);
             Sc.nextLine();
 

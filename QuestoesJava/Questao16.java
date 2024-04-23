@@ -1,3 +1,4 @@
+package QuestoesJava;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -364,7 +365,7 @@ class Personagem {
     }
 }
 
-public class Questao15 {
+public class Questao16 {
 
     public static void swap(Personagem vetor[], int i, int j ){
         Personagem tmp = vetor[i].clone(vetor[i]);

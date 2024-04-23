@@ -1,4 +1,10 @@
+package QuestoesJava;
 import java.util.Scanner;
+
+import DateTime;
+import Lista;
+import Personagem;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 
@@ -61,7 +67,7 @@ class DateTime {
     }
 
     public void mostra() {
-        System.out.print(day + "-" + month + "-" + year + " ");
+        System.out.print(day + "-" + month + "-" + year + " ## ");
     }
 
 }
@@ -339,11 +345,85 @@ class Personagem {
     }
 
     public Personagem clone(Personagem personagem) {
-        return personagem;
+
+        Personagem clone = new Personagem(
+            personagem.getId(),
+            personagem.getName(),
+            personagem.getAlternate_names(),
+            personagem.getHouse(),
+            personagem.getAncestry(),
+            personagem.getSpecies(),
+            personagem.getPatronus(),
+            personagem.getHogwartsStaff(),
+            personagem.getHogwartsStudent(),
+            personagem.getActorName(),
+            personagem.getAlive(),
+            personagem.getDateOfBirth(),
+            personagem.getYearOfBirth(),
+            personagem.getEyeColour(),
+            personagem.getGender(),
+            personagem.getHairColour(),
+            personagem.getWizard()
+        );
+
+        return clone;
     }
 }
 
-public class HarryPotter {
+public class Questao5 {
+
+    public static void swap(Personagem vetor[], int i, int j ){
+        Personagem tmp = vetor[i].clone(vetor[i]);
+        vetor[i] = vetor[j].clone(vetor[j]);
+        vetor[j] = tmp.clone(tmp);
+    }
+
+    public static void SelectionSort(Personagem vetor[]){
+        for(int i = 0; i < vetor.length - 1 && vetor[i] != null; i++){
+            String menor = new String(vetor[i].getName());
+            int tmp = i;
+            for(int j = i + 1; j < vetor.length; j++){
+                if(vetor[j] != null && vetor[j].getName().compareTo(menor) < 0){
+                    menor = new String(vetor[j].getName());
+                    tmp = j;
+                    //System.out.println(maior);
+                }
+            }
+            swap(vetor, i, tmp);
+        }
+    }
+
+
+    public static void isInVetor(Personagem vetor[], String name){
+        Boolean test = false;
+
+        for(int i = 0; i < vetor.length; i++){
+            if(vetor[i] != null && vetor[i].getName().equals(name)){
+                test = true;
+                i = vetor.length;
+            }
+        }
+
+        if(test == false){
+            System.out.println("NAO");
+        }
+        else{
+            System.out.println("SIM");
+        }
+    }
+
+    public static int RegistraVetor(Personagem personagem[], Personagem vetor[], String id, int j){
+        for(int i = 0; i < 405; i++){
+            if(personagem[i].getId().equals(id)){
+                vetor[j] = personagem[i].clone(personagem[i]);
+                j++;
+                i = 405;
+            }
+    
+        }
+
+        return j;
+    }
 
     public static void getObjeto(String id, Personagem personagem[]) {
         for (int i = 0; i < personagem.length; i++) {
@@ -398,6 +478,7 @@ public class HarryPotter {
 
     public static void main(String[] args) {
         Personagem personagem[] = new Personagem[405];
+        Personagem vetor[] = new Personagem[50];
         try {
             File myObj = new File("/tmp/characters.csv");
             Scanner Sc = new Scanner(myObj);
@@ -414,8 +495,8 @@ public class HarryPotter {
                 DateTime data = new DateTime(atributos[12]);
                 int ano = Integer.parseInt(atributos[13]);
                 personagem[i] = new Personagem(atributos[0], atributos[1], list, atributos[3], atributos[4],
-                        atributos[5], atributos[6], stringToBoolean(atributos[7]), stringToBoolean(atributos[8]),
-                        atributos[9], stringToBoolean(atributos[10]), data, ano, atributos[14], atributos[15],
+                        atributos[5], atributos[6], false, false,
+                        atributos[9], false, data, ano, atributos[14], atributos[15],
                         atributos[16], stringToBoolean(atributos[17]));
                 i++;
             }
@@ -429,10 +510,21 @@ public class HarryPotter {
         Scanner Sc = new Scanner(System.in);
 
         String id = Sc.nextLine();
+        int j = 0;
         while (isFim(id)) {
-            getObjeto(id, personagem);
+            j = RegistraVetor(personagem, vetor, id, j);
             id = Sc.nextLine();
         }
 
+        SelectionSort(vetor);
+
+        for(int i = 0; vetor[i] != null && i < 405; i++){
+            vetor[i].imprime();
+        }
+        
+        
+
     }
 }
+
+//C:/Users/Victor/Documents/FACULDADE/2 semestre/Aeds 2/TP_2/characters.csv
