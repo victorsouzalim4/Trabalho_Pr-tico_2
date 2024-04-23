@@ -365,7 +365,77 @@ class Personagem {
     }
 }
 
-public class Questao3 {
+public class Questao07 {
+
+    public static void swap(Personagem vetor[], int i, int j ){
+        Personagem tmp = vetor[i].clone(vetor[i]);
+        vetor[i] = vetor[j].clone(vetor[j]);
+        vetor[j] = tmp.clone(tmp);
+    }
+
+    public static void SelectionSort(Personagem vetor[]){
+        for(int i = 0; i < vetor.length - 1 && vetor[i] != null; i++){
+            String maior = new String(vetor[i].getName());
+            int tmp = i;
+            for(int j = i + 1; j < vetor.length; j++){
+                if(vetor[j] != null && vetor[j].getName().compareTo(maior) < 0){
+                    maior = new String(vetor[j].getName());
+                    tmp = j;
+                    //System.out.println(maior);
+                }
+            }
+            swap(vetor, i, tmp);
+        }
+    }
+
+    public static void InsertionSort(Personagem vetor[]){
+        
+        for (int i = 1; vetor[i] != null && i < vetor.length; i++) {
+            Personagem menor = vetor[i].clone(vetor[i]);
+            //String s =  new String(vetor[i].getDateOfBirth().getYear());
+            int j = i;
+            Boolean test = true;
+            while (test == true && j > 0 && vetor[j-1].getDateOfBirth().getYear().compareTo(menor.getDateOfBirth().getYear()) >= 0 ) {
+                if(vetor[j-1].getDateOfBirth().getYear().compareTo(menor.getDateOfBirth().getYear()) == 0){
+                    if(vetor[j-1].getDateOfBirth().getMonth().compareTo(menor.getDateOfBirth().getMonth()) >= 0){
+                        if(vetor[j-1].getDateOfBirth().getMonth().compareTo(menor.getDateOfBirth().getMonth()) == 0){
+                            if(vetor[j-1].getDateOfBirth().getDay().compareTo(menor.getDateOfBirth().getDay()) >= 0){
+                                if(vetor[j-1].getDateOfBirth().getDay().compareTo(menor.getDateOfBirth().getDay()) == 0){
+                                    if(vetor[j-1].getName().compareTo(menor.getName()) > 0){
+                                        vetor[j] = vetor[j - 1].clone(vetor[j-1]);
+                                        j--;
+                                    }
+                                    else{
+                                        test = false;
+                                    }
+                                    
+                                }else{
+                                    vetor[j] = vetor[j - 1].clone(vetor[j-1]);
+                                    j--;
+                                }   
+                            }
+                            else{
+                                test = false;
+                            }
+                        }else{
+                            vetor[j] = vetor[j - 1].clone(vetor[j-1]);
+                            j--;
+                        }
+
+                    }else{
+                        vetor[j] = vetor[j - 1].clone(vetor[j-1]);
+                        j--;
+                    }
+                }else{
+                    vetor[j] = vetor[j - 1].clone(vetor[j-1]);
+                    j--;
+                }
+
+            }
+            vetor[j] = menor.clone(menor);
+
+        }
+    }
 
     public static void isInVetor(Personagem vetor[], String name){
         Boolean test = false;
@@ -453,7 +523,7 @@ public class Questao3 {
         Personagem personagem[] = new Personagem[405];
         Personagem vetor[] = new Personagem[50];
         try {
-            File myObj = new File("C:/Users/Victor/Documents/FACULDADE/2 semestre/Aeds 2/TP_2/characters.csv");
+            File myObj = new File("/tmp/characters.csv");
             Scanner Sc = new Scanner(myObj);
             Sc.nextLine();
 
@@ -470,7 +540,7 @@ public class Questao3 {
                 personagem[i] = new Personagem(atributos[0], atributos[1], list, atributos[3], atributos[4],
                         atributos[5], atributos[6], false, false,
                         atributos[9], false, data, ano, atributos[14], atributos[15],
-                        atributos[16], false);
+                        atributos[16], stringToBoolean(atributos[17]));
                 i++;
             }
 
@@ -489,24 +559,14 @@ public class Questao3 {
             id = Sc.nextLine();
         }
 
-        String name = Sc.nextLine();
+        //SelectionSort(vetor);
+        InsertionSort(vetor);
 
-        while(isFim(name)){
-            isInVetor(vetor, name);
-            name = Sc.nextLine();
+        for(int i = 0; vetor[i] != null && i < 405; i++){
+            vetor[i].imprime();
         }
         
         
-        
-        
-        /*for(int i = 0; i < 50; i++){
-            if(vetor[i] != null){
-                vetor[i].imprime();
-            }
-        }*/
-
-        //Personagem test = personagem[2].clone(personagem[2]);
-        //test.imprime();
 
     }
 }

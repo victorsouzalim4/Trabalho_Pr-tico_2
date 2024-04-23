@@ -1,10 +1,5 @@
 package QuestoesJava;
 import java.util.Scanner;
-
-import DateTime;
-import Lista;
-import Personagem;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 
@@ -370,29 +365,7 @@ class Personagem {
     }
 }
 
-public class Questao5 {
-
-    public static void swap(Personagem vetor[], int i, int j ){
-        Personagem tmp = vetor[i].clone(vetor[i]);
-        vetor[i] = vetor[j].clone(vetor[j]);
-        vetor[j] = tmp.clone(tmp);
-    }
-
-    public static void SelectionSort(Personagem vetor[]){
-        for(int i = 0; i < vetor.length - 1 && vetor[i] != null; i++){
-            String menor = new String(vetor[i].getName());
-            int tmp = i;
-            for(int j = i + 1; j < vetor.length; j++){
-                if(vetor[j] != null && vetor[j].getName().compareTo(menor) < 0){
-                    menor = new String(vetor[j].getName());
-                    tmp = j;
-                    //System.out.println(maior);
-                }
-            }
-            swap(vetor, i, tmp);
-        }
-    }
-
+public class Questao03 {
 
     public static void isInVetor(Personagem vetor[], String name){
         Boolean test = false;
@@ -480,7 +453,7 @@ public class Questao5 {
         Personagem personagem[] = new Personagem[405];
         Personagem vetor[] = new Personagem[50];
         try {
-            File myObj = new File("/tmp/characters.csv");
+            File myObj = new File("C:/Users/Victor/Documents/FACULDADE/2 semestre/Aeds 2/TP_2/characters.csv");
             Scanner Sc = new Scanner(myObj);
             Sc.nextLine();
 
@@ -497,7 +470,7 @@ public class Questao5 {
                 personagem[i] = new Personagem(atributos[0], atributos[1], list, atributos[3], atributos[4],
                         atributos[5], atributos[6], false, false,
                         atributos[9], false, data, ano, atributos[14], atributos[15],
-                        atributos[16], stringToBoolean(atributos[17]));
+                        atributos[16], false);
                 i++;
             }
 
@@ -516,13 +489,24 @@ public class Questao5 {
             id = Sc.nextLine();
         }
 
-        SelectionSort(vetor);
+        String name = Sc.nextLine();
 
-        for(int i = 0; vetor[i] != null && i < 405; i++){
-            vetor[i].imprime();
+        while(isFim(name)){
+            isInVetor(vetor, name);
+            name = Sc.nextLine();
         }
         
         
+        
+        
+        /*for(int i = 0; i < 50; i++){
+            if(vetor[i] != null){
+                vetor[i].imprime();
+            }
+        }*/
+
+        //Personagem test = personagem[2].clone(personagem[2]);
+        //test.imprime();
 
     }
 }

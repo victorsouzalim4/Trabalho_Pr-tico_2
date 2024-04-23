@@ -340,133 +340,11 @@ class Personagem {
     }
 
     public Personagem clone(Personagem personagem) {
-
-        Personagem clone = new Personagem(
-            personagem.getId(),
-            personagem.getName(),
-            personagem.getAlternate_names(),
-            personagem.getHouse(),
-            personagem.getAncestry(),
-            personagem.getSpecies(),
-            personagem.getPatronus(),
-            personagem.getHogwartsStaff(),
-            personagem.getHogwartsStudent(),
-            personagem.getActorName(),
-            personagem.getAlive(),
-            personagem.getDateOfBirth(),
-            personagem.getYearOfBirth(),
-            personagem.getEyeColour(),
-            personagem.getGender(),
-            personagem.getHairColour(),
-            personagem.getWizard()
-        );
-
-        return clone;
+        return personagem;
     }
 }
 
-public class Questao7 {
-
-    public static void swap(Personagem vetor[], int i, int j ){
-        Personagem tmp = vetor[i].clone(vetor[i]);
-        vetor[i] = vetor[j].clone(vetor[j]);
-        vetor[j] = tmp.clone(tmp);
-    }
-
-    public static void SelectionSort(Personagem vetor[]){
-        for(int i = 0; i < vetor.length - 1 && vetor[i] != null; i++){
-            String maior = new String(vetor[i].getName());
-            int tmp = i;
-            for(int j = i + 1; j < vetor.length; j++){
-                if(vetor[j] != null && vetor[j].getName().compareTo(maior) < 0){
-                    maior = new String(vetor[j].getName());
-                    tmp = j;
-                    //System.out.println(maior);
-                }
-            }
-            swap(vetor, i, tmp);
-        }
-    }
-
-    public static void InsertionSort(Personagem vetor[]){
-        
-        for (int i = 1; vetor[i] != null && i < vetor.length; i++) {
-            Personagem menor = vetor[i].clone(vetor[i]);
-            //String s =  new String(vetor[i].getDateOfBirth().getYear());
-            int j = i;
-            Boolean test = true;
-            while (test == true && j > 0 && vetor[j-1].getDateOfBirth().getYear().compareTo(menor.getDateOfBirth().getYear()) >= 0 ) {
-                if(vetor[j-1].getDateOfBirth().getYear().compareTo(menor.getDateOfBirth().getYear()) == 0){
-                    if(vetor[j-1].getDateOfBirth().getMonth().compareTo(menor.getDateOfBirth().getMonth()) >= 0){
-                        if(vetor[j-1].getDateOfBirth().getMonth().compareTo(menor.getDateOfBirth().getMonth()) == 0){
-                            if(vetor[j-1].getDateOfBirth().getDay().compareTo(menor.getDateOfBirth().getDay()) >= 0){
-                                if(vetor[j-1].getDateOfBirth().getDay().compareTo(menor.getDateOfBirth().getDay()) == 0){
-                                    if(vetor[j-1].getName().compareTo(menor.getName()) > 0){
-                                        vetor[j] = vetor[j - 1].clone(vetor[j-1]);
-                                        j--;
-                                    }
-                                    else{
-                                        test = false;
-                                    }
-                                    
-                                }else{
-                                    vetor[j] = vetor[j - 1].clone(vetor[j-1]);
-                                    j--;
-                                }   
-                            }
-                            else{
-                                test = false;
-                            }
-                        }else{
-                            vetor[j] = vetor[j - 1].clone(vetor[j-1]);
-                            j--;
-                        }
-
-                    }else{
-                        vetor[j] = vetor[j - 1].clone(vetor[j-1]);
-                        j--;
-                    }
-                }else{
-                    vetor[j] = vetor[j - 1].clone(vetor[j-1]);
-                    j--;
-                }
-
-            }
-            vetor[j] = menor.clone(menor);
-
-        }
-    }
-
-    public static void isInVetor(Personagem vetor[], String name){
-        Boolean test = false;
-
-        for(int i = 0; i < vetor.length; i++){
-            if(vetor[i] != null && vetor[i].getName().equals(name)){
-                test = true;
-                i = vetor.length;
-            }
-        }
-
-        if(test == false){
-            System.out.println("NAO");
-        }
-        else{
-            System.out.println("SIM");
-        }
-    }
-
-    public static int RegistraVetor(Personagem personagem[], Personagem vetor[], String id, int j){
-        for(int i = 0; i < 405; i++){
-            if(personagem[i].getId().equals(id)){
-                vetor[j] = personagem[i].clone(personagem[i]);
-                j++;
-                i = 405;
-            }
-    
-        }
-
-        return j;
-    }
+public class Questao01 {
 
     public static void getObjeto(String id, Personagem personagem[]) {
         for (int i = 0; i < personagem.length; i++) {
@@ -521,7 +399,6 @@ public class Questao7 {
 
     public static void main(String[] args) {
         Personagem personagem[] = new Personagem[405];
-        Personagem vetor[] = new Personagem[50];
         try {
             File myObj = new File("/tmp/characters.csv");
             Scanner Sc = new Scanner(myObj);
@@ -540,7 +417,7 @@ public class Questao7 {
                 personagem[i] = new Personagem(atributos[0], atributos[1], list, atributos[3], atributos[4],
                         atributos[5], atributos[6], false, false,
                         atributos[9], false, data, ano, atributos[14], atributos[15],
-                        atributos[16], stringToBoolean(atributos[17]));
+                        atributos[16], false);
                 i++;
             }
 
@@ -553,20 +430,10 @@ public class Questao7 {
         Scanner Sc = new Scanner(System.in);
 
         String id = Sc.nextLine();
-        int j = 0;
         while (isFim(id)) {
-            j = RegistraVetor(personagem, vetor, id, j);
+            getObjeto(id, personagem);
             id = Sc.nextLine();
         }
-
-        //SelectionSort(vetor);
-        InsertionSort(vetor);
-
-        for(int i = 0; vetor[i] != null && i < 405; i++){
-            vetor[i].imprime();
-        }
-        
-        
 
     }
 }
