@@ -368,7 +368,7 @@ class Personagem {
 
 public class Questao09 {
 
-    private static int compare(Personagem a, Personagem b) {
+    public static int compare(Personagem a, Personagem b) {
         int houseComparison = a.getHairColour().compareTo(b.getHairColour());
         if (houseComparison != 0) {
             return houseComparison;
@@ -377,6 +377,18 @@ public class Questao09 {
         }
     }
 
+    public static int getMaiorFilho(Personagem heap[], int i, int tam){
+        int maior;
+        if(compare(heap[2*i], heap[2*i+1]) < 0){
+            maior = 2*i;
+        }
+        else{
+            maior = 2*i+1;
+        }
+
+        return maior;
+    }
+    
     public static Boolean hasFilho(Personagem heap[], int i, int tam){
         Boolean test = true;
 
@@ -391,6 +403,7 @@ public class Questao09 {
 
         int i = 1;
         while(hasFilho(heap, i, tam) == true){
+            int filho = getMaiorFilho(heap, i, tam);
         }
     }
 
@@ -439,7 +452,7 @@ public class Questao09 {
 
         
         for(int j = 1; j < heap.length; j++){
-            System.out.println(heap[j].getHairColour());
+            System.out.println(heap[j].getHairColour() + " " + heap[j].getName());
         }
 
     }
