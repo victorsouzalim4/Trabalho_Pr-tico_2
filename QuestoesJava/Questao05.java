@@ -1,10 +1,6 @@
 package QuestoesJava;
 import java.util.Scanner;
 
-import DateTime;
-import Lista;
-import Personagem;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 
@@ -495,8 +491,8 @@ public class Questao05 {
                 DateTime data = new DateTime(atributos[12]);
                 int ano = Integer.parseInt(atributos[13]);
                 personagem[i] = new Personagem(atributos[0], atributos[1], list, atributos[3], atributos[4],
-                        atributos[5], atributos[6], false, false,
-                        atributos[9], false, data, ano, atributos[14], atributos[15],
+                        atributos[5], atributos[6], stringToBoolean(atributos[7]), stringToBoolean(atributos[8]),
+                        atributos[9], stringToBoolean(atributos[10]), data, ano, atributos[14], atributos[15],
                         atributos[16], stringToBoolean(atributos[17]));
                 i++;
             }
