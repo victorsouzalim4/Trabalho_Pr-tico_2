@@ -379,12 +379,18 @@ public class Questao09 {
 
     public static int getMaiorFilho(Personagem heap[], int i, int tam){
         int maior;
-        if(compare(heap[2*i], heap[2*i+1]) < 0){
+        if(2*i+1 > tam){
             maior = 2*i;
         }
         else{
-            maior = 2*i+1;
+            if(compare(heap[2*i], heap[2*i+1]) < 0){
+                maior = 2*i;
+            }
+            else{
+                maior = 2*i+1;
+            }
         }
+
 
         return maior;
     }
@@ -404,6 +410,18 @@ public class Questao09 {
         int i = 1;
         while(hasFilho(heap, i, tam) == true){
             int filho = getMaiorFilho(heap, i, tam);
+
+            System.out.println(heap[i].getHairColour() + " " + heap[i].getName());
+            System.out.println(heap[filho].getHairColour() + " " + heap[filho].getName());
+
+            if(compare(heap[i], heap[filho]) > 0){
+                System.out.println("troca");
+                swap(heap, i, filho);
+                i = filho;
+            }
+            else{
+                i = tam;
+            }
         }
     }
 
@@ -444,16 +462,26 @@ public class Questao09 {
                 tam++;
         }
 
-        while(tam > 1){
-            swap(heap, 1, tam);
-            tam--;
-            reconstroiHeap(heap, tam);
-        }
-
-        
         for(int j = 1; j < heap.length; j++){
             System.out.println(heap[j].getHairColour() + " " + heap[j].getName());
         }
+
+        System.out.println("\n\n");
+
+        while(tam > 1){
+            swap(heap, 1, tam--);
+            reconstroiHeap(heap, tam);
+        }
+
+        System.out.println("\n\n");
+        for(int j = 1; j < heap.length; j++){
+            System.out.println(heap[j].getHairColour() + " " + heap[j].getName());
+        }
+
+        
+        /*for(int j = 1; j < heap.length; j++){
+            System.out.println(heap[j].getHairColour() + " " + heap[j].getName());
+        }*/
 
     }
 
