@@ -384,10 +384,10 @@ public class Questao09 {
         }
         else{
             if(compare(heap[2*i], heap[2*i+1]) < 0){
-                maior = 2*i;
+                maior = 2*i+1;
             }
             else{
-                maior = 2*i+1;
+                maior = 2*i;
             }
         }
 
@@ -411,11 +411,8 @@ public class Questao09 {
         while(hasFilho(heap, i, tam) == true){
             int filho = getMaiorFilho(heap, i, tam);
 
-            System.out.println(heap[i].getHairColour() + " " + heap[i].getName());
-            System.out.println(heap[filho].getHairColour() + " " + heap[filho].getName());
+            if(compare(heap[i], heap[filho]) < 0){
 
-            if(compare(heap[i], heap[filho]) > 0){
-                System.out.println("troca");
                 swap(heap, i, filho);
                 i = filho;
             }
@@ -426,7 +423,7 @@ public class Questao09 {
     }
 
     public static void adicionaNoHeap(Personagem heap[], int pos){
-        for(; pos > 1 && compare(heap[pos], heap[pos/2]) < 0  ; pos = pos/2){
+        for(; pos > 1 && compare(heap[pos], heap[pos/2]) > 0  ; pos = pos/2){
             swap(heap, pos, pos/2);
         }
     }
@@ -462,26 +459,16 @@ public class Questao09 {
                 tam++;
         }
 
-        for(int j = 1; j < heap.length; j++){
-            System.out.println(heap[j].getHairColour() + " " + heap[j].getName());
-        }
-
-        System.out.println("\n\n");
 
         while(tam > 1){
             swap(heap, 1, tam--);
             reconstroiHeap(heap, tam);
         }
 
-        System.out.println("\n\n");
         for(int j = 1; j < heap.length; j++){
-            System.out.println(heap[j].getHairColour() + " " + heap[j].getName());
+            heap[j].imprime();
         }
 
-        
-        /*for(int j = 1; j < heap.length; j++){
-            System.out.println(heap[j].getHairColour() + " " + heap[j].getName());
-        }*/
 
     }
 
