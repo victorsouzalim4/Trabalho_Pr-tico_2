@@ -377,6 +377,23 @@ public class Questao09 {
         }
     }
 
+    public static Boolean hasFilho(Personagem heap[], int i, int tam){
+        Boolean test = true;
+
+        if(2*i > tam){
+            test = false;
+        }
+
+        return test;
+    }
+
+    public static void reconstroiHeap(Personagem heap[], int tam){
+
+        int i = 1;
+        while(hasFilho(heap, i, tam) == true){
+        }
+    }
+
     public static void adicionaNoHeap(Personagem heap[], int pos){
         for(; pos > 1 && compare(heap[pos], heap[pos/2]) < 0  ; pos = pos/2){
             swap(heap, pos, pos/2);
@@ -404,13 +421,20 @@ public class Questao09 {
     }
 
     public static void HeapSort(Personagem vetor[]){
-        
+
+        int tam = 0;
         Personagem heap[] = new Personagem[contaObjetos(vetor) + 1];
 
         for(int i = 0; vetor[i] != null && i < contaObjetos(vetor); i++){
             heap[i+1] = vetor[i].clone(vetor[i]);
                 adicionaNoHeap(heap, i+1);
+                tam++;
+        }
 
+        while(tam > 1){
+            swap(heap, 1, tam);
+            tam--;
+            reconstroiHeap(heap, tam);
         }
 
         
