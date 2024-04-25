@@ -1,4 +1,4 @@
-package QuestoesJava;
+//package QuestoesJava;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -374,12 +374,12 @@ public class Questao16 {
     }
 
     public static void SelectionSort(Personagem vetor[]){
-        for(int i = 0; i < 10 && vetor[i] != null; i++){
-            String menor = new String(vetor[i].getName());
+        for(int i = 0; i < vetor.length - 1 && vetor[i] != null; i++){
+            String maior = new String(vetor[i].getName());
             int tmp = i;
             for(int j = i + 1; j < vetor.length; j++){
-                if(vetor[j] != null && vetor[j].getName().compareTo(menor) < 0){
-                    menor = new String(vetor[j].getName());
+                if(vetor[j] != null && vetor[j].getName().compareTo(maior) < 0){
+                    maior = new String(vetor[j].getName());
                     tmp = j;
                     //System.out.println(maior);
                 }
@@ -388,6 +388,60 @@ public class Questao16 {
         }
     }
 
+    public static void InsertionSort(Personagem vetor[]){
+        
+        for (int i = 1; vetor[i] != null && i < vetor.length; i++) {
+            Personagem menor = vetor[i].clone(vetor[i]);
+            //String s =  new String(vetor[i].getDateOfBirth().getYear());
+            int j;
+            if(i < 10){
+                 j = i;
+            }else{
+                j = 10;
+            }
+            
+            Boolean test = true;
+            while (test == true && j > 0 && vetor[j-1].getDateOfBirth().getYear().compareTo(menor.getDateOfBirth().getYear()) >= 0 ) {
+                if(vetor[j-1].getDateOfBirth().getYear().compareTo(menor.getDateOfBirth().getYear()) == 0){
+                    if(vetor[j-1].getDateOfBirth().getMonth().compareTo(menor.getDateOfBirth().getMonth()) >= 0){
+                        if(vetor[j-1].getDateOfBirth().getMonth().compareTo(menor.getDateOfBirth().getMonth()) == 0){
+                            if(vetor[j-1].getDateOfBirth().getDay().compareTo(menor.getDateOfBirth().getDay()) >= 0){
+                                if(vetor[j-1].getDateOfBirth().getDay().compareTo(menor.getDateOfBirth().getDay()) == 0){
+                                    if(vetor[j-1].getName().compareTo(menor.getName()) > 0){
+                                        vetor[j] = vetor[j - 1].clone(vetor[j-1]);
+                                        j--;
+                                    }
+                                    else{
+                                        test = false;
+                                    }
+                                    
+                                }else{
+                                    vetor[j] = vetor[j - 1].clone(vetor[j-1]);
+                                    j--;
+                                }   
+                            }
+                            else{
+                                test = false;
+                            }
+                        }else{
+                            vetor[j] = vetor[j - 1].clone(vetor[j-1]);
+                            j--;
+                        }
+
+                    }else{
+                        vetor[j] = vetor[j - 1].clone(vetor[j-1]);
+                        j--;
+                    }
+                }else{
+                    vetor[j] = vetor[j - 1].clone(vetor[j-1]);
+                    j--;
+                }
+
+            }
+            vetor[j] = menor.clone(menor);
+
+        }
+    }
 
     public static void isInVetor(Personagem vetor[], String name){
         Boolean test = false;
@@ -511,7 +565,8 @@ public class Questao16 {
             id = Sc.nextLine();
         }
 
-        SelectionSort(vetor);
+        //SelectionSort(vetor);
+        InsertionSort(vetor);
 
         for(int i = 0; vetor[i] != null && i < 10; i++){
             vetor[i].imprime();
