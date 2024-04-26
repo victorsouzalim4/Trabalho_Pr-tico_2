@@ -514,6 +514,12 @@ int comparaElementos(Personagem a, Personagem b){
     }
 } 
 
+void swap(Personagem vetor[], int i, int j){
+    Personagem tmp = vetor[i];
+    vetor[i] = vetor[j];
+    vetor[j] = tmp;
+}
+
 int main(){
 
     FILE *arq = fopen("C:/Users/Victor/Documents/FACULDADE/2 semestre/Aeds 2/TP_2/characters.csv", "r");
@@ -579,7 +585,7 @@ int main(){
             scanf("%99[^\n]%*c", teste);
         }
 
-        /*for(int i = 0; i < 100; i++){
+        /*for(int i = 0; i < 2; i++){
             if(strcmp(vetor[i].name, "") != 0){
                 imprimePersonagem(vetor, i);
             }
