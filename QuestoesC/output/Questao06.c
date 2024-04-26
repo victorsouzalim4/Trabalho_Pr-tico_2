@@ -506,12 +506,10 @@ int addOnVetor(Personagem personagem, Personagem vetor[], int i){
 }
 
 int comparaElementos(Personagem a, Personagem b){
-    int houseComparison = strcmp(a.name, b.name);
-    if (houseComparison != 0) {
-        return houseComparison;
-    } else {
-        return strcmp(a.name, b.name);
-    }
+
+    int Comparison = strcmp(a.name, b.name);
+    return Comparison;
+
 } 
 
 void swap(Personagem vetor[], int i, int j){
@@ -521,21 +519,21 @@ void swap(Personagem vetor[], int i, int j){
 }
 
 void selectionSort(Personagem vetor[], int pos){
-    
+
     int menor = pos;
 
     if(pos < 26){
-        printf("entrei %d\n", pos);
+        //printf("entrei %d\n", pos);
         for(int i = pos + 1; strcmp(vetor[i].name, "") != 0 && i < 27; i++){
             if(comparaElementos(vetor[menor], vetor[i]) > 0){
                 menor = i;
             }
         }
-        printf("saiS %d\n", pos);
+        //printf("saiS %d\n", pos);
         swap(vetor, pos, menor);
-        printf("sai msm");
         selectionSort(vetor, pos + 1);
-        
+        //printf("sai msm\n");
+            
     }
 
     
@@ -544,7 +542,7 @@ void selectionSort(Personagem vetor[], int pos){
 
 int main(){
 
-    FILE *arq = fopen("C:/Users/Victor/Documents/FACULDADE/2 semestre/Aeds 2/TP_2/characters.csv", "r");
+    FILE *arq = fopen("/tmp/characters.csv", "r");
     char linha[1000];
     char atributos[18][1000];
     char apelidos[10][150];
@@ -587,9 +585,10 @@ int main(){
         scanf("%99[^\n]%*c", teste);
     }*/
 
-        Personagem vetor[100];
+        Personagem vetor[27];
 
         scanf("%99[^\n]%*c", teste);
+        teste[strcspn(teste, "\r")] = '\0';
         int indice = 0;
         while(isFim(teste)){
 
@@ -605,13 +604,15 @@ int main(){
                 teste[i] = '\0';
             }
             scanf("%99[^\n]%*c", teste);
+            teste[strcspn(teste, "\r")] = '\0';
         }
 
         selectionSort(vetor, 0);
-        printf("sai");
+        //printf("sai");
 
-        for(int i = 0; i < 2; i++){
+        for(int i = 0; i < 27; i++){
             if(strcmp(vetor[i].name, "") != 0){
+                //printf("alow");
                 imprimePersonagem(vetor, i);
             }
         }
