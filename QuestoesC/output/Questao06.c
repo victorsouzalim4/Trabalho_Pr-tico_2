@@ -505,6 +505,15 @@ int addOnVetor(Personagem personagem, Personagem vetor[], int i){
     return i;
 }
 
+int comparaElementos(Personagem a, Personagem b){
+    int houseComparison = strcmp(a.name, b.name);
+    if (houseComparison != 0) {
+        return houseComparison;
+    } else {
+        return strcmp(a.name, b.name);
+    }
+} 
+
 int main(){
 
     FILE *arq = fopen("C:/Users/Victor/Documents/FACULDADE/2 semestre/Aeds 2/TP_2/characters.csv", "r");
@@ -528,8 +537,6 @@ int main(){
         separaApelidos(apelidos, atributos);
         ConstroiPersonagem(atributos, apelidos, personagens, i);
         i++;
-        //printf("entrei");
-        //printf("\n%s", atributos[2]);
     }
 
     char teste[100];
@@ -572,11 +579,11 @@ int main(){
             scanf("%99[^\n]%*c", teste);
         }
 
-        for(int i = 0; i < 100; i++){
+        /*for(int i = 0; i < 100; i++){
             if(strcmp(vetor[i].name, "") != 0){
                 imprimePersonagem(vetor, i);
             }
-        }
+        }*/
 
- 
+
 }
