@@ -520,6 +520,28 @@ void swap(Personagem vetor[], int i, int j){
     vetor[j] = tmp;
 }
 
+void selectionSort(Personagem vetor[], int pos){
+    
+    int menor = pos;
+
+    if(pos < 26){
+        printf("entrei %d\n", pos);
+        for(int i = pos + 1; strcmp(vetor[i].name, "") != 0 && i < 27; i++){
+            if(comparaElementos(vetor[menor], vetor[i]) > 0){
+                menor = i;
+            }
+        }
+        printf("saiS %d\n", pos);
+        swap(vetor, pos, menor);
+        printf("sai msm");
+        selectionSort(vetor, pos + 1);
+        
+    }
+
+    
+    
+}
+
 int main(){
 
     FILE *arq = fopen("C:/Users/Victor/Documents/FACULDADE/2 semestre/Aeds 2/TP_2/characters.csv", "r");
@@ -585,11 +607,14 @@ int main(){
             scanf("%99[^\n]%*c", teste);
         }
 
-        /*for(int i = 0; i < 2; i++){
+        selectionSort(vetor, 0);
+        printf("sai");
+
+        for(int i = 0; i < 2; i++){
             if(strcmp(vetor[i].name, "") != 0){
                 imprimePersonagem(vetor, i);
             }
-        }*/
+        }
 
 
 }
