@@ -58,17 +58,17 @@ void recebeAtributos(char atributos[18][1000], char* linha){
     }
 }
 
-void separaApelidos(char apelidos[10][100], char atributos[18][1000]){
+void separaApelidos(char apelidos[10][150], char atributos[18][1000]){
     
     for(int i = 0; i < 10; i++){
-        for(int j = 0; j < 100; j++){
+        for(int j = 0; j < 150; j++){
             apelidos[i][j] = '\0';
         }
     }
     int  pos = 0;
     for(int i = 0; i < 10; i++){
         int cont = 0;
-        for(int j = pos, k = 0; j < 100; j++, k++){
+        for(int j = pos, k = 0; j < 150; j++, k++){
             if(atributos[2][j] == '\''){
                 cont++;
                 j++;
@@ -78,7 +78,7 @@ void separaApelidos(char apelidos[10][100], char atributos[18][1000]){
             }
             else if(cont == 2){
                 pos = j+1;
-                j = 100; 
+                j = 150; 
             }
                //printf("%c", apelidos[i][k]);  
         }
@@ -163,7 +163,7 @@ int StringToInt(char atributos[18][1000], int indice){
 
 }
 
-void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Personagem* personagem, int posicao){
+void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][150], Personagem* personagem, int posicao){
     
     char str[1000];
     
@@ -194,12 +194,12 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
 
 
         for(int i = 0; i < 10; i++){
-            char str1[100];
-            for(int k = 0; k < 100; k++){
+            char str1[150];
+            for(int k = 0; k < 150; k++){
                 str1[i] = '\0';
             }
             int cont = 0;
-            for(int j = 0; j < 100 ; j++){
+            for(int j = 0; j < 150 ; j++){
                 if(apelidos[i][j] > 'a' && apelidos[i][j] < 'z'){
                     cont++;
                 }
@@ -452,7 +452,7 @@ void imprimePersonagem(Personagem personagens[], int indice){
        else{
           printf("false ## ");
        }
-       printf("%s ", personagens[indice].actorName);
+       printf("%s ## ", personagens[indice].actorName);
        if(personagens[indice].alive == true){
           printf("true ## ");
        }
@@ -498,12 +498,19 @@ bool isFim(char str[]){
 
     return test;
 }
+
+int addOnVetor(Personagem personagem, Personagem vetor[], int i){
+    vetor[i] = personagem;
+    i++;
+    return i;
+}
+
 int main(){
 
     FILE *arq = fopen("C:/Users/Victor/Documents/FACULDADE/2 semestre/Aeds 2/TP_2/characters.csv", "r");
     char linha[1000];
     char atributos[18][1000];
-    char apelidos[10][100];
+    char apelidos[10][150];
     Personagem* personagens = (Personagem*) malloc (sizeof(Personagem)*405);
 
 
@@ -527,15 +534,13 @@ int main(){
 
     char teste[100];
 
-    for(int i = 0; i < 100; i++){
-        teste[i] = '\0';
-    }
 
-    scanf("%99[^\n]%*c", teste);
+
+    //scanf("%99[^\n]%*c", teste);
     //imprimePersonagem(personagens, 0);
     //printf("%s,", personagens[1].name);
 
-    while(isFim(teste)){
+    /*while(isFim(teste)){
         for(int i = 0; i < 405; i++){
             if(isIgual(teste, personagens[i].id)){
                 imprimePersonagem(personagens, i);
@@ -545,9 +550,33 @@ int main(){
        
         //setbuf(stdin, NULL);
         scanf("%99[^\n]%*c", teste);
-    }
+    }*/
 
+        Personagem vetor[100];
 
+        scanf("%99[^\n]%*c", teste);
+        int indice = 0;
+        while(isFim(teste)){
+
+            for(int i = 0; i < 405; i++){
+                if(strcmp(personagens[i].id, teste) == 0){
+                    indice = addOnVetor(personagens[i], vetor, indice);
+                    i = 405;
+                }
+                
+            }
+
+            for(int i = 0; i < 100; i++){
+                teste[i] = '\0';
+            }
+            scanf("%99[^\n]%*c", teste);
+        }
+
+        /*for(int i = 0; i < 100; i++){
+            if(strcmp(vetor[i].name, "") != 0){
+                imprimePersonagem(vetor, i);
+            }
+        }*/
 
  
 }
