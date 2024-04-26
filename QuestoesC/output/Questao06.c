@@ -58,17 +58,17 @@ void recebeAtributos(char atributos[18][1000], char* linha){
     }
 }
 
-void separaApelidos(char apelidos[10][100], char atributos[18][1000]){
-
+void separaApelidos(char apelidos[10][150], char atributos[18][1000]){
+    
     for(int i = 0; i < 10; i++){
-        for(int j = 0; j < 100; j++){
+        for(int j = 0; j < 150; j++){
             apelidos[i][j] = '\0';
         }
     }
     int  pos = 0;
     for(int i = 0; i < 10; i++){
         int cont = 0;
-        for(int j = pos, k = 0; j < 100; j++, k++){
+        for(int j = pos, k = 0; j < 150; j++, k++){
             if(atributos[2][j] == '\''){
                 cont++;
                 j++;
@@ -78,7 +78,7 @@ void separaApelidos(char apelidos[10][100], char atributos[18][1000]){
             }
             else if(cont == 2){
                 pos = j+1;
-                j = 100; 
+                j = 150; 
             }
                //printf("%c", apelidos[i][k]);  
         }
@@ -124,7 +124,7 @@ void separaData(Personagem personagem[405], char atributos[18][1000], int indice
     day[i] = '\0';
     pos++; 
 
-
+  
     i = 0;
     while (atributos[indice][pos] != '-') {
         month[i++] = atributos[indice][pos++];
@@ -132,7 +132,7 @@ void separaData(Personagem personagem[405], char atributos[18][1000], int indice
     month[i] = '\0'; 
     pos++; 
 
-
+  
     i = 0;
     while (atributos[indice][pos] != '\0') {
         year[i++] = atributos[indice][pos++];
@@ -163,10 +163,10 @@ int StringToInt(char atributos[18][1000], int indice){
 
 }
 
-void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Personagem* personagem, int posicao){
-
+void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][150], Personagem* personagem, int posicao){
+    
     char str[1000];
-
+    
     for(int i = 0; i < 1000; i++){
         str[i] = '\0';
     }
@@ -175,7 +175,7 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
         str[i] = atributos[0][i];
     }
     strcpy(personagem[posicao].id, str);
-
+ 
 
 
 
@@ -188,18 +188,18 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
         str[i] = atributos[1][i];
     }
     strcpy(personagem[posicao].name, str);
-
+   
 
 
 
 
         for(int i = 0; i < 10; i++){
-            char str1[100];
-            for(int k = 0; k < 100; k++){
+            char str1[150];
+            for(int k = 0; k < 150; k++){
                 str1[i] = '\0';
             }
             int cont = 0;
-            for(int j = 0; j < 100 ; j++){
+            for(int j = 0; j < 150 ; j++){
                 if(apelidos[i][j] > 'a' && apelidos[i][j] < 'z'){
                     cont++;
                 }
@@ -207,20 +207,20 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
                     str1[j] = apelidos[i][j+1];
                     //printf("%c", str1[j]);
                     //printf("%d\n", j);
-
-
+                    
+                 
 
             }
             strcpy(personagem[posicao].alternate_names.apelidos[i], str1);
-
-
+            
+            
             if(cont != 0){
                 //printf("\n%s", str1);
                 //printf("\n %d %s,",i, personagem[posicao].alternate_names.apelidos[i]);
             }   
         }
 
-
+    
 
 
 
@@ -237,7 +237,7 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
         str[i] = atributos[3][i];
     }
     strcpy(personagem[posicao].house, str);
-
+    
 
 
 
@@ -251,7 +251,7 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
         str[i] = atributos[4][i];
     }
     strcpy(personagem[posicao].ancestry, str);
-
+    
 
 
 
@@ -266,7 +266,7 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
         str[i] = atributos[5][i];
     }
     strcpy(personagem[posicao].species, str);
-
+    
 
 
 
@@ -282,7 +282,7 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
         str[i] = atributos[6][i];
     }
     strcpy(personagem[posicao].patronus, str);
-
+    
 
 
 
@@ -296,7 +296,7 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
     else{
         personagem[posicao].hogwartsStaff = false;
     }
-
+    
 
 
 
@@ -310,7 +310,7 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
     else{
         personagem[posicao].hogwartsStudent = false;
     }
-
+    
 
 
 
@@ -324,7 +324,7 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
         str[i] = atributos[9][i];
     }
     strcpy(personagem[posicao].actorName, str);
-
+    
 
 
 
@@ -339,7 +339,7 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
     else{
         personagem[posicao].alive = false;
     }
-
+    
 
 
 
@@ -357,7 +357,7 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
 
     int ano = StringToInt(atributos, 13);
     personagem[posicao].yearOfBirth = ano;
-
+    
 
 
 
@@ -372,7 +372,7 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
         str[i] = atributos[14][i];
     }
     strcpy(personagem[posicao].eyeColour, str);
-
+    
 
 
 
@@ -388,7 +388,7 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
         str[i] = atributos[15][i];
     }
     strcpy(personagem[posicao].gender, str);
-
+    
 
 
 
@@ -402,7 +402,7 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
         str[i] = atributos[16][i];
     }
     strcpy(personagem[posicao].hairColour, str);
-
+    
 
 
     valor = StringToBoolean(atributos, 17);
@@ -412,7 +412,7 @@ void ConstroiPersonagem(char atributos[18][1000], char apelidos[10][100], Person
     else{
         personagem[posicao].wizard = false;
     }
-
+    
 }   
 
 void imprimePersonagem(Personagem personagens[], int indice){
@@ -431,11 +431,11 @@ void imprimePersonagem(Personagem personagens[], int indice){
                 }else{
                     printf("%s", personagens[indice].alternate_names.apelidos[i]);
                 }
-
+                 
             }
         }
          printf("} ## ");
-
+    
        printf("%s ## ", personagens[indice].house);
        printf("%s ## ", personagens[indice].ancestry);
        printf("%s ## ", personagens[indice].species);
@@ -452,7 +452,7 @@ void imprimePersonagem(Personagem personagens[], int indice){
        else{
           printf("false ## ");
        }
-       printf("%s ", personagens[indice].actorName);
+       printf("%s ## ", personagens[indice].actorName);
        if(personagens[indice].alive == true){
           printf("true ## ");
        }
@@ -473,7 +473,7 @@ void imprimePersonagem(Personagem personagens[], int indice){
        else{
           printf("false]\n");
        }
-
+       
 }
 
 bool isIgual(char str[], char id[]){
@@ -498,12 +498,19 @@ bool isFim(char str[]){
 
     return test;
 }
+
+int addOnVetor(Personagem personagem, Personagem vetor[], int i){
+    vetor[i] = personagem;
+    i++;
+    return i;
+}
+
 int main(){
 
     FILE *arq = fopen("C:/Users/Victor/Documents/FACULDADE/2 semestre/Aeds 2/TP_2/characters.csv", "r");
     char linha[1000];
     char atributos[18][1000];
-    char apelidos[10][100];
+    char apelidos[10][150];
     Personagem* personagens = (Personagem*) malloc (sizeof(Personagem)*405);
 
 
@@ -527,27 +534,49 @@ int main(){
 
     char teste[100];
 
-    for(int i = 0; i < 100; i++){
-        teste[i] = '\0';
-    }
 
-    scanf("%99[^\n]%*c", teste);
+
+    //scanf("%99[^\n]%*c", teste);
     //imprimePersonagem(personagens, 0);
     //printf("%s,", personagens[1].name);
 
-    while(isFim(teste)){
+    /*while(isFim(teste)){
         for(int i = 0; i < 405; i++){
             if(isIgual(teste, personagens[i].id)){
                 imprimePersonagem(personagens, i);
                 i = 405;
             }
         }
-
+       
         //setbuf(stdin, NULL);
         scanf("%99[^\n]%*c", teste);
-    }
+    }*/
 
+        Personagem vetor[100];
 
+        scanf("%99[^\n]%*c", teste);
+        int indice = 0;
+        while(isFim(teste)){
 
+            for(int i = 0; i < 405; i++){
+                if(strcmp(personagens[i].id, teste) == 0){
+                    indice = addOnVetor(personagens[i], vetor, indice);
+                    i = 405;
+                }
+                
+            }
 
+            for(int i = 0; i < 100; i++){
+                teste[i] = '\0';
+            }
+            scanf("%99[^\n]%*c", teste);
+        }
+
+        for(int i = 0; i < 100; i++){
+            if(strcmp(vetor[i].name, "") != 0){
+                imprimePersonagem(vetor, i);
+            }
+        }
+
+ 
 }
