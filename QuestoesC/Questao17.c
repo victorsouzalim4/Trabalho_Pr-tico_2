@@ -507,9 +507,13 @@ int addOnVetor(Personagem personagem, Personagem vetor[], int i){
 
 int comparaElementos(Personagem a, Personagem b){
 
-    int Comparison = strcmp(a.name, b.name);
+    int Comparison = strcmp(a.hairColour, b.hairColour);
+    if(Comparison != 0) {
+        return Comparison;
+    }else {
+        return strcmp(a.name, b.name);
+    }
     return Comparison;
-
 } 
 
 void swap(Personagem vetor[], int i, int j){
@@ -540,29 +544,78 @@ void selectionSort(Personagem vetor[], int pos){
     
 }
 
-bool buscaBinaria(Personagem vetor[], char name[]){
-    int pos = 0;
-    int n = 26;
-    bool test = false;
-
-    while (pos <= n) {
-        int meio = (pos + n) / 2;
-        //printf("%s %s\n", vetor[meio].name, name );
-        if (strcmp(vetor[meio].name, name) == 0){
-            test = true;
-            n = pos -1;
-        } else if (strcmp(vetor[meio].name, name) > 0) {
-            n = meio - 1;
-        } else {
-            pos = meio + 1;
-        }
+void adicionaNoHeap(Personagem heap[], int pos){
+    for(; pos > 1 && comparaElementos(heap[pos], heap[pos/2]) > 0  ; pos = pos/2){
+        swap(heap, pos, pos/2);
     }
+}
+
+bool hasFilho(int i, int tam){
+    bool test = true;
+
+    if(2*i > tam){
+        test = false;
+    }
+
     return test;
 }
 
+int getMaiorFilho(Personagem heap[], int i, int tam){
+    int maior;
+    if(2*i+1 > tam){
+        maior = 2*i;
+    }
+    else{
+        if(comparaElementos(heap[2*i], heap[2*i+1]) < 0){
+            maior = 2*i+1;
+        }
+        else{
+            maior = 2*i;
+        }
+    }
+    return maior;
+}
+void reconstroiHeap(Personagem heap[], int tam){
+    int i = 1;
+    while(hasFilho(i, tam)){
+        int filho = getMaiorFilho(heap, i, tam);
+
+        if(comparaElementos(heap[i], heap[filho]) < 0){
+
+            swap(heap, i, filho);
+            i = filho;
+        }
+        else{
+            i = tam;
+        }
+    }
+}
+
+void heapSort(Personagem vetor[]){
+    int tam = 0;
+    Personagem heap[28];
+
+    for(int i = 0; i < 27; i++){
+        heap[i+1] = vetor[i];
+            adicionaNoHeap(heap, i+1);
+            tam++;
+    }
+
+
+    while(tam > 1){
+        swap(heap, 1, tam--);
+        reconstroiHeap(heap, tam);
+    }
+
+    /*for(int j = 1; j < heap.length; j++){
+        heap[j].imprime();
+    }*/
+}
+
+
 int main(){
 
-    FILE *arq = fopen("/tmp/characters.csv", "r");
+    FILE *arq = fopen("C:/Users/Victor/Documents/FACULDADE/2 semestre/Aeds 2/TP_2/characters.csv", "r");
     char linha[1000];
     char atributos[18][1000];
     char apelidos[10][150];
@@ -573,7 +626,7 @@ int main(){
 
     if(arq == NULL){
         printf("Erro na abertura do arquivo");
-        return 1; 
+        return 1;
     }
 
     fgets(linha, 1000, arq);
@@ -628,35 +681,14 @@ int main(){
         }
 
         selectionSort(vetor, 0);
-
-        
-        /*for(int i = 0; i < 27; i++){
-            if(strcmp(vetor[i].name, "") != 0){
-                printf("%s\n", vetor[i].name);
-                //imprimePersonagem(vetor, i);
-            }
-        }*/
-
-        scanf("%99[^\n]%*c", teste);
-        teste[strcspn(teste, "\r")] = '\0';
-
-        while (isFim(teste)){
-           bool resp = buscaBinaria(vetor, teste);
-           if(resp == true){
-            printf("SIM\n");
-           }else{
-            printf("NAO\n");
-           }
-
-            scanf("%99[^\n]%*c", teste);
-            teste[strcspn(teste, "\r")] = '\0';
-        }
-        
-        
-
-
         //printf("sai");
 
+        for(int i = 0; i < 27; i++){
+            if(strcmp(vetor[i].name, "") != 0){
+                //printf("alow");
+                imprimePersonagem(vetor, i);
+            }
+        }
 
 
 }
