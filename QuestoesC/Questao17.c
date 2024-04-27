@@ -595,13 +595,20 @@ void heapSort(Personagem vetor[]){
     int tam = 0;
     Personagem heap[28];
 
-    for(int i = 0; i < 27; i++){
+    for(int i = 0; i < 10; i++){
         heap[i+1] = vetor[i];
             adicionaNoHeap(heap, i+1);
             tam++;
     }
 
+    for(int i = 10 + 1; i < 27; i++){
+        if(comparaElementos(vetor[i], heap[1]) < 0){
+            heap[1] = vetor[i];
+            reconstroiHeap(heap, 10);
+        }
+    }
 
+    tam = 10;
     while(tam > 1){
         swap(heap, 1, tam--);
         reconstroiHeap(heap, tam);
@@ -615,7 +622,7 @@ void heapSort(Personagem vetor[]){
 
 int main(){
 
-    FILE *arq = fopen("C:/Users/Victor/Documents/FACULDADE/2 semestre/Aeds 2/TP_2/characters.csv", "r");
+    FILE *arq = fopen("/tmp/characters.csv", "r");
     char linha[1000];
     char atributos[18][1000];
     char apelidos[10][150];
@@ -683,7 +690,7 @@ int main(){
         selectionSort(vetor, 0);
         //printf("sai");
 
-        for(int i = 0; i < 27; i++){
+        for(int i = 0; i < 10; i++){
             if(strcmp(vetor[i].name, "") != 0){
                 //printf("alow");
                 imprimePersonagem(vetor, i);
