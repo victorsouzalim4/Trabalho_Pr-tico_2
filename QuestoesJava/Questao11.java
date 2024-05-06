@@ -368,9 +368,15 @@ class Personagem {
 
 public class Questao11 {
 
+    public static void qtdOcorrenciasNoVetor(Personagem vetor[], int aux[]){
+        for(int i = 0; vetor[i] != null && i < vetor.length; i++){
+            aux[vetor[i].getYearOfBirth()]++;
+        }
+    }
+
     public static int getMaiorAno(Personagem vetor[]){
         int maior = vetor[0].getYearOfBirth();
-        for(int i = 1; i < vetor.length; i++){
+        for(int i = 1; vetor[i] != null && i < vetor.length; i++){
             if(vetor[i].getYearOfBirth() > maior){
                 maior = vetor[i].getYearOfBirth();
             }
@@ -401,7 +407,14 @@ public class Questao11 {
     }
 
     public static void CountingSort(Personagem vetor[]){
-        
+        int aux[] = new int[getMaiorAno(vetor)];
+        for(int i = 0; i < aux.length; i++){
+            aux[i] = 0;
+        }
+
+
+
+        //System.out.println(aux.length);
     }
 
     public static void isInVetor(Personagem vetor[], String name){
@@ -527,10 +540,12 @@ public class Questao11 {
         }
 
         SelectionSort(vetor);
+        CountingSort(vetor);
 
-        for(int i = 0; vetor[i] != null && i < 405; i++){
+        /*for(int i = 0; vetor[i] != null && i < 405; i++){
             vetor[i].imprime();
-        }
+        }*/
+
         
         
 
