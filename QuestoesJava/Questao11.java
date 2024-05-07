@@ -368,6 +368,12 @@ class Personagem {
 
 public class Questao11 {
 
+    public static void frequenciaAcumulada(int aux[]){
+        for(int i = 1; i < aux.length; i++){
+            aux[i] += aux[i-1];
+        }
+    }
+
     public static void qtdOcorrenciasNoVetor(Personagem vetor[], int aux[]){
         for(int i = 0; vetor[i] != null && i < vetor.length; i++){
             aux[vetor[i].getYearOfBirth()]++;
@@ -375,8 +381,8 @@ public class Questao11 {
     }
 
     public static int getMaiorAno(Personagem vetor[]){
-        int maior = vetor[0].getYearOfBirth();
-        for(int i = 1; vetor[i] != null && i < vetor.length; i++){
+        int maior = vetor[1].getYearOfBirth();
+        for(int i = 2; vetor[i] != null && i < vetor.length; i++){
             if(vetor[i].getYearOfBirth() > maior){
                 maior = vetor[i].getYearOfBirth();
             }
@@ -407,10 +413,14 @@ public class Questao11 {
     }
 
     public static void CountingSort(Personagem vetor[]){
-        int aux[] = new int[getMaiorAno(vetor)];
+        int aux[] = new int[getMaiorAno(vetor) + 1];
         for(int i = 0; i < aux.length; i++){
             aux[i] = 0;
         }
+
+        qtdOcorrenciasNoVetor(vetor, aux);
+        frequenciaAcumulada(aux);
+        //System.out.println(aux[1981]);
 
 
 
