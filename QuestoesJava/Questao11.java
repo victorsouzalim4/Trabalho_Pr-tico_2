@@ -414,16 +414,28 @@ public class Questao11 {
 
     public static void CountingSort(Personagem vetor[]){
         int aux[] = new int[getMaiorAno(vetor) + 1];
+        Personagem tmp[] = new Personagem[vetor.length];
+
         for(int i = 0; i < aux.length; i++){
             aux[i] = 0;
         }
 
         qtdOcorrenciasNoVetor(vetor, aux);
         frequenciaAcumulada(aux);
+
+        for(int i = tmp.length -1;  i >= 0; i--){
+            if(vetor[i] != null){
+                tmp[aux[vetor[i].getYearOfBirth()] -1] = vetor[i];
+                aux[vetor[i].getYearOfBirth()]--;
+            }
+        }
+
+        for(int i = 0; i < tmp.length; i++){
+            vetor[i] = tmp[i];
+        }
+
+
         //System.out.println(aux[1981]);
-
-
-
         //System.out.println(aux.length);
     }
 
@@ -552,9 +564,9 @@ public class Questao11 {
         SelectionSort(vetor);
         CountingSort(vetor);
 
-        /*for(int i = 0; vetor[i] != null && i < 405; i++){
+        for(int i = 0; vetor[i] != null && i < 405; i++){
             vetor[i].imprime();
-        }*/
+        }
 
         
         
